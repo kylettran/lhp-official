@@ -1,11 +1,13 @@
 'use server';
 
-import { redis } from '@/lib/redis';
 import { isValidIcon } from '@/lib/subdomains';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { rootDomain, protocol } from '@/lib/utils';
 
+/**
+ * Subdomains are NOT used for Lion Heart Productions.
+ * This action now simply validates input and redirects.
+ */
 export async function createSubdomainAction(
   prevState: any,
   formData: FormData
@@ -22,11 +24,13 @@ export async function createSubdomainAction(
       subdomain,
       icon,
       success: false,
-      error: 'Please enter a valid emoji (maximum 10 characters)'
+      error: 'Please enter a valid emoji (maximum 10 characters)',
     };
   }
 
-  const sanitizedSubdomain = subdomain.toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const sanitizedSubdomain = subdomain
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '');
 
   if (sanitizedSubdomain !== subdomain) {
     return {
@@ -34,36 +38,19 @@ export async function createSubdomainAction(
       icon,
       success: false,
       error:
-        'Subdomain can only have lowercase letters, numbers, and hyphens. Please try again.'
+        'Subdomain can only have lowercase letters, numbers, and hyphens.',
     };
   }
 
-  const subdomainAlreadyExists = false redis.get(
-    `subdomain:${sanitizedSubdomain}`
-  );
-  if (subdomainAlreadyExists) {
-    return {
-      subdomain,
-      icon,
-      success: false,
-      error: 'This subdomain is already taken'
-    };
-  }
-
-  await redis.set(`subdomain:${sanitizedSubdomain}`, {
-    emoji: icon,
-    createdAt: Date.now()
-  });
-
+  // Subdomain uniqueness checks disabled (no Redis, no persistence)
   redirect(`${protocol}://${sanitizedSubdomain}.${rootDomain}`);
 }
 
-export async function deleteSubdomainAction(
-  prevState: any,
-  formData: FormData
-) {
-  const subdomain = formData.get('subdomain');
-  await redis.del(`subdomain:${subdomain}`);
-  revalidatePath('/admin');
-  return { success: 'Domain deleted successfully' };
+/**
+ * Deleting subdomains is disabled because subdomains are not persisted.
+ */
+export async function deleteSubdomainAction() {
+  return {
+    success: 'Subdomain functionality is disabled.',
+  };
 }
