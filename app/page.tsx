@@ -1,33 +1,87 @@
-import Link from 'next/link';
-import { SubdomainForm } from './subdomain-form';
-import { rootDomain } from '@/lib/utils';
+import { sanityClient } from '@/lib/sanity.client'
+import groq from 'groq'
+import Link from 'next/link'
+
+const upcomingEventQuery = groq`
+  *[_type == "event" && status == "upcoming"]
+  | order(date asc)[0]{
+    title,
+    slug,
+    date,
+    location,
+    description
+  }
+`
+
+const pastEventsQuery = groq`
+  *[_type == "event" && status == "past"]
+  | order(date desc){
+    title,
+    slug,
+    date,
+    location
+  }
+`
 
 export default async function HomePage() {
+  const upcomingEvent = await sanityClient.fetch(upcomingEventQuery)
+  const pastEvents = await sanityClient.fetch(pastEventsQuery)
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-white p-4 relative">
-      <div className="absolute top-4 right-4">
-        <Link
-          href="/admin"
-          className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          Admin
-        </Link>
-      </div>
-
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-            {rootDomain}
+    <main className="max-w-5xl mx-auto py-16 px-4 space-y-20">
+      
+      {/* HERO / CURRENT EVENT */}
+      {upcomingEvent && (
+        <section>
+          <h1 className="text-4xl font-bold mb-4">
+            {upcomingEvent.title}
           </h1>
-          <p className="mt-3 text-lg text-gray-600">
-            Create your own subdomain with a custom emoji
-          </p>
-        </div>
 
-        <div className="mt-8 bg-white shadow-md rounded-lg p-6">
-          <SubdomainForm />
-        </div>
-      </div>
-    </div>
-  );
+          <p className="text-lg text-gray-600 mb-2">
+            {new Date(upcomingEvent.date).toLocaleDateString()} · {upcomingEvent.location}
+          </p>
+
+          <p className="max-w-2xl mb-6">
+            {upcomingEvent.description}
+          </p>
+
+          {/* ACTION BUTTONS */}
+          <div className="flex gap-4">
+            <Link
+              href={`/events/${upcomingEvent.slug.current}`}
+              className="inline-block bg-black text-white px-6 py-3 rounded"
+            >
+              Buy Tickets
+            </Link>
+
+            <Link
+              href="/artists"
+              className="inline-block border border-black px-6 py-3 rounded hover:bg-black hover:text-white transition"
+            >
+              View Artists
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* PAST EVENTS */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Past Events</h2>
+
+        <ul className="space-y-3">
+          {pastEvents.map((event: any) => (
+            <li key={event.slug.current}>
+              <Link
+                href={`/events/${event.slug.current}`}
+                className="underline"
+              >
+                {event.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+    </main>
+  )
 }
