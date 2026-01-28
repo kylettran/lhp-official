@@ -1,12 +1,11 @@
 'use server';
 
-import { isValidIcon } from '@/lib/subdomains';
 import { redirect } from 'next/navigation';
 import { rootDomain, protocol } from '@/lib/utils';
 
 /**
  * Subdomains are NOT used for Lion Heart Productions.
- * This action now simply validates input and redirects.
+ * This action now only validates basic input and redirects.
  */
 export async function createSubdomainAction(
   prevState: any,
@@ -19,10 +18,9 @@ export async function createSubdomainAction(
     return { success: false, error: 'Subdomain and icon are required' };
   }
 
-  if (!isValidIcon(icon)) {
+  // Basic emoji length check (replaces isValidIcon)
+  if (icon.length > 10) {
     return {
-      subdomain,
-      icon,
       success: false,
       error: 'Please enter a valid emoji (maximum 10 characters)',
     };
@@ -34,20 +32,18 @@ export async function createSubdomainAction(
 
   if (sanitizedSubdomain !== subdomain) {
     return {
-      subdomain,
-      icon,
       success: false,
       error:
         'Subdomain can only have lowercase letters, numbers, and hyphens.',
     };
   }
 
-  // Subdomain uniqueness checks disabled (no Redis, no persistence)
+  // Subdomain system is disabled — redirect only
   redirect(`${protocol}://${sanitizedSubdomain}.${rootDomain}`);
 }
 
 /**
- * Deleting subdomains is disabled because subdomains are not persisted.
+ * Deleting subdomains is disabled because subdomains are not supported.
  */
 export async function deleteSubdomainAction() {
   return {
