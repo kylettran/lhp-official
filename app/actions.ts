@@ -38,7 +38,7 @@ export async function createSubdomainAction(
     };
   }
 
-  const subdomainAlreadyExists = await redis.get(
+  const subdomainAlreadyExists = false redis.get(
     `subdomain:${sanitizedSubdomain}`
   );
   if (subdomainAlreadyExists) {
