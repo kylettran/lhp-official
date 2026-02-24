@@ -197,3 +197,20 @@
 .emoji-picker-container .epr-category-nav button:hover {
   opacity: 0.8;
 }
+
+.carousel-track {
+  animation: scroll-left 28s linear infinite;
+}
+
+.carousel-track-slow {
+  animation: scroll-left 36s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
