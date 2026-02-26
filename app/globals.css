@@ -214,3 +214,18 @@
     transform: translateX(-50%);
   }
 }
+
+.home-video {
+  margin: 24px 0 28px;
+}
+
+.home-video__player {
+  width: 100%;
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 20px;
+  background: #000;
+}
