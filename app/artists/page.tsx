@@ -4,6 +4,7 @@ import { allArtistsQuery } from '@/lib/sanity.queries'
 export default async function ArtistsPage() {
   const artists = await sanityClient.fetch(allArtistsQuery)
   const ayeAreOverride = '/assets/images/ar.png'
+  const katOverride = '/assets/images/kat-pfp.png'
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-16">
@@ -15,11 +16,13 @@ export default async function ArtistsPage() {
             .replace(/[^a-z]/g, '')
             .trim()
           const isAyeAre = normalizedName === 'ayeare'
+          const isKat = normalizedName === 'katherinedeleon'
 
-          const imageSrc =
-            artist.image?.asset?.url || isAyeAre ? (
-              isAyeAre ? ayeAreOverride : artist.image.asset.url
-            ) : null
+          const imageSrc = isAyeAre
+            ? ayeAreOverride
+            : isKat
+              ? katOverride
+              : artist.image?.asset?.url || null
 
           return (
             <div
@@ -40,7 +43,9 @@ export default async function ArtistsPage() {
                       className={`h-48 w-full rounded-lg mb-4 ${
                         isAyeAre
                           ? 'object-contain bg-black'
-                          : 'object-cover object-center'
+                          : isKat
+                            ? 'object-cover object-[50%_20%]'
+                            : 'object-cover object-center'
                       }`}
                     />
                   </a>
@@ -51,7 +56,9 @@ export default async function ArtistsPage() {
                     className={`h-48 w-full rounded-lg mb-4 ${
                       isAyeAre
                         ? 'object-contain bg-black'
-                        : 'object-cover object-center'
+                        : isKat
+                          ? 'object-cover object-[50%_20%]'
+                          : 'object-cover object-center'
                     }`}
                   />
                 )
