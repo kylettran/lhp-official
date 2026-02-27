@@ -27,13 +27,16 @@ export default async function HomePage() {
   return (
     <main className="max-w-5xl mx-auto py-16 px-4 space-y-20">
       <section className="home-video">
-        <iframe
+        <video
           className="home-video__player"
-          src="https://www.youtube.com/embed/B5iNbWAaeLA?autoplay=1&mute=1&playsinline=1&rel=0"
+          src="/assets/videos/48-seconds.mov"
           title="LHP Highlight Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls
+          preload="metadata"
         />
       </section>
 

@@ -60,7 +60,7 @@ export default async function EventPage({
   const allEvents = await sanityClient.fetch(allEventsQuery)
 
   const lovesAndLonesFallback = {
-    title: 'Loves and Lones',
+    title: 'Lovers and Loners',
     date: '2026-02-12T21:00:00.000Z',
     status: 'past',
     location: 'The Continental Room · Fullerton, CA',
@@ -70,7 +70,7 @@ export default async function EventPage({
     ticketUrl: null,
     instagramUrl: null,
     teamMessage:
-      'Thank you for making Loves and Lones unforgettable. Every set, every lyric, every dance move made the room feel like home.',
+      'Thank you for making Lovers and Loners unforgettable. Every set, every lyric, every dance move made the room feel like home.',
     posterImage: null,
     gallery: [],
     videoHighlights: [],

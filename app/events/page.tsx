@@ -119,7 +119,7 @@ export default async function PastEventsPage() {
               2/12/2026
             </p>
             <p className="mt-2 text-lg font-semibold text-neutral-900">
-              Loves and Lones
+              Lovers and Loners
             </p>
           </Link>
         )}
