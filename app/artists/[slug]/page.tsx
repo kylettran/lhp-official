@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
@@ -16,7 +17,7 @@ const artistBySlugQuery = groq`
   }
 `
 
-const socialIconMap: Record<string, JSX.Element> = {
+const socialIconMap: Record<string, ReactElement> = {
   instagram: (
     <svg
       viewBox="0 0 24 24"
