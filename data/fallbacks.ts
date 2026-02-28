@@ -340,8 +340,8 @@ export interface ImpactEventStat {
 }
 
 export const curatedImpactEventStats: ImpactEventStat[] = [
-  { slug: '2k24-rager', attendees: 95 },
-  { slug: '2k25-sundown', attendees: 112 },
-  { slug: '2k25-rager', attendees: 165 },
+  { slug: '2k24-rager', attendees: 20 },
+  { slug: '2k25-sundown', attendees: 25 },
+  { slug: '2k25-rager', attendees: 65 },
   { slug: 'loves-and-lones', attendees: 150 },
 ]
