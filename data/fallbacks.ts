@@ -244,6 +244,22 @@ export interface PastEventFallback {
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
+  'loves-and-lones': {
+    slug: 'loves-and-lones',
+    title: 'Lovers & Loners',
+    date: '2026-02-12T21:00:00.000Z',
+    status: 'past',
+    location: 'The Continental Room · Fullerton, CA',
+    description:
+      'An emotionally charged night where AYE.ARE and FRESE traded verses, vinyl spun vinyl, and the room felt like a single pulse.',
+    instagramUrl: 'https://www.instagram.com/lhpofficial',
+    teamMessage:
+      'Raising the roof with Lovers & Loners was a love letter to the community—thank you for showing up for every verse and every beat.',
+    posterImage: null,
+    gallery: [],
+    videoHighlights: [],
+    attendees: ['Ari Moss', 'Dorian Rae', 'Eli Vance', 'Mina Glass', 'Sasha Lor'],
+  },
   '2k24-rager': {
     slug: '2k24-rager',
     title: '2K24 Rager',
@@ -327,4 +343,5 @@ export const curatedImpactEventStats: ImpactEventStat[] = [
   { slug: '2k24-rager', attendees: 95 },
   { slug: '2k25-sundown', attendees: 112 },
   { slug: '2k25-rager', attendees: 165 },
+  { slug: 'loves-and-lones', attendees: 150 },
 ]
