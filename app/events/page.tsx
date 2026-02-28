@@ -6,6 +6,7 @@ import {
   pastEventFallbackList,
   pastEventFallbacks,
 } from '@/data/fallbacks'
+import ImpactDonutChart, { ImpactSegment } from '@/components/impact-donut-chart'
 
 const pastEventsQuery = groq`
   *[_type == "event" && status == "past"]
@@ -44,35 +45,11 @@ export default async function PastEventsPage() {
     0
   )
   const colors = ['#3f92f6', '#fb7185', '#c084fc', '#38bdf8']
-  const segments = impactEvents.map((event, index) => {
-    const percent = totalAttendees
-      ? (event.attendees / totalAttendees) * 100
-      : 0
-    return {
-      ...event,
-      color: colors[index % colors.length],
-      percent,
-    }
-  })
-  const donutGradient = (() => {
-    if (!totalAttendees) {
-      return 'conic-gradient(#3f92f6 0%, #3f92f6 100%)'
-    }
-
-    let cursor = 0
-    const stops: string[] = []
-    segments.forEach((segment) => {
-      const start = cursor
-      const end = cursor + segment.percent
-      stops.push(`${segment.color} ${start}% ${end}%`)
-      cursor = end
-    })
-    if (cursor < 100) {
-      stops.push(`rgba(255,255,255,0.08) ${cursor}% 100%`)
-    }
-    return `conic-gradient(${stops.join(', ')})`
-  })()
-
+  const impactSegments: ImpactSegment[] = impactEvents.map((event, index) => ({
+    ...event,
+    color: colors[index % colors.length],
+    percent: totalAttendees ? (event.attendees / totalAttendees) * 100 : 0,
+  }))
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
       <div className="text-center">
@@ -95,37 +72,7 @@ export default async function PastEventsPage() {
           <p className="impact-total-label">Total Event Attendees</p>
         </div>
 
-        <div className="impact-visual">
-          <div className="impact-donut" style={{ background: donutGradient }}>
-            <div className="impact-donut-inner">
-              <p className="impact-donut-number">{totalAttendees}+</p>
-              <p className="impact-donut-subtext">Attendees</p>
-            </div>
-          </div>
-          <div className="impact-legend">
-            {segments.map((segment) => (
-              <Link
-                key={segment.name}
-                href={segment.href}
-                className="impact-legend-row"
-              >
-                <span
-                  className="impact-legend-swatch"
-                  style={{ backgroundColor: segment.color }}
-                />
-                <div>
-                  <p className="impact-legend-name">{segment.name}</p>
-                  <p className="impact-legend-count">
-                    {segment.attendees} attendees
-                  </p>
-                </div>
-                <span className="impact-legend-percent">
-                  {segment.percent.toFixed(1)}%
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
+        <ImpactDonutChart segments={impactSegments} total={totalAttendees} />
       </section>
 
       <div className="mt-12 flex flex-col items-center gap-4">
