@@ -24,22 +24,16 @@ const manualProfiles: ManualArtistProfile[] = [
     name: 'Aye.Are',
     slug: { current: 'ayeare' },
     role: 'Co-Founder/Artist',
-    bio: `i didn't go to school for this. i taught myself — chatbots, 
-voice agents, automation tools, websites shipped on vercel. 
-zapier led to chatgpt led to claude code led to realizing 
-i could build real things that worked.
+    bio: `Aye.Are didn’t wait for opportunity — he built it.
 
-then i met a family. their kids were half my age — curious, 
-energetic, firing questions at me nonstop. and something clicked.
+Growing up in the High Desert where stages were limited and doors rarely opened, he created Lion Heart Productions to curate his own shows and get his reps in. What started as a way to perform quickly became something bigger: a platform to network, learn the industry, and build real momentum from the ground up.
 
-i thought about who i was at 16. junior year. AP classes. 
-track and field. already racing against time without knowing 
-where i was running. nobody handed me a roadmap. i had to 
-find that years later, alone.
+Believing there’s no single blueprint to success, Aye.Are stands for artists finding their own path. Inspired by independence but guided by self-discovery, he built his career through consistency, reflection, and relentless growth. From chasing opportunities to attracting them, his evolution reflects a deeper shift — no longer proving, but building. No longer waiting, but creating.
 
-those kids didn't have to wait that long.
+Lion Heart isn’t just about him. It’s about creating rooms he once wished existed. Alongside a team that believed from day one, he’s building a space where DJs, artists, and creatives can grow, perform, and find their voice. In a culture that often celebrates individual wins, Aye.Are believes in winning together.
 
-lynx combinator exists so they don't.`,
+There’s more than one way to make it.
+This is his.`,
     socialLinks: {
       instagram: 'https://www.instagram.com/aye.are',
     },
