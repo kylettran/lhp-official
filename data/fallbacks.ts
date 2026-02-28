@@ -22,7 +22,7 @@ const manualProfiles: ManualArtistProfile[] = [
   {
     _id: 'manual-ayeare',
     name: 'Aye.Are',
-    slug: { current: 'ayeare' },
+    slug: { current: 'aye-are' },
     role: 'Co-Founder/Artist',
     bio: `Aye.Are didn’t wait for opportunity — he built it.
 

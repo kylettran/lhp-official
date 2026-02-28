@@ -48,7 +48,7 @@ const socialIconMap: Record<string, ReactElement> = {
 
 const fallbackInstagramBySlug: Record<string, string> = {
   ap: 'https://www.instagram.com/ap',
-  ayeare: 'https://www.instagram.com/aye.are',
+  'aye-are': 'https://www.instagram.com/aye.are',
   katherinedeleon: 'https://www.instagram.com/katherinedeleon',
 }
 
