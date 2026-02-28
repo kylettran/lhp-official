@@ -103,6 +103,12 @@ export default async function ArtistPage({
   }
   const socialEntries = Object.entries(mergedSocialLinks).filter(([, url]) => Boolean(url))
 
+  const biographyText = manualArtist?.bio ?? profile.bio ?? 'Bio coming soon.'
+  const biographySegments = biographyText
+    .split(/\n\s*\n/)
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+
   const renderSocialLink = ([platform, url]: [string, string]) => {
     const normalizedPlatform = platform.toLowerCase()
     const icon = socialIconMap[normalizedPlatform]
@@ -179,11 +185,26 @@ export default async function ArtistPage({
         <p className="mb-6 text-lg text-gray-600">{profile.role}</p>
       )}
 
-      <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900">About</h2>
-        <p className="text-neutral-700">
-          {manualArtist?.bio ?? profile.bio ?? 'Bio coming soon.'}
-        </p>
+      <section className="mb-8 space-y-6">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-xl font-semibold text-neutral-900">About</h2>
+          <span className="text-xs uppercase tracking-[0.4em] text-neutral-500">Profile</span>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          {biographySegments.map((segment, index) => (
+            <article
+              key={`bio-segment-${index}`}
+              className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111025] to-[#1b1630] p-6 shadow-lg shadow-[#150c2d]/30"
+            >
+              {index === 0 && (
+                <p className="mb-3 text-xs uppercase tracking-[0.5em] text-[#78bfff]">
+                  Origins
+                </p>
+              )}
+              <p className="text-base leading-relaxed text-neutral-200">{segment}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       {socialEntries.length > 0 && (
