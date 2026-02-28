@@ -264,7 +264,7 @@ export interface PastEventFallback {
   description: string
   instagramUrl?: string
   teamMessage?: string
-  posterImage?: { asset: { url: string } }
+  posterImage?: { asset: { url: string } } | null
   gallery?: { asset: { url: string } }[]
   videoHighlights?: { title: string; url: string }[]
   attendees?: string[]
