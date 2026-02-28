@@ -62,9 +62,13 @@ export default async function ArtistPage({
   const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug })
   const manualArtist = manualArtistProfilesBySlug[slug]
 
-  const profile =
-    sanityArtist ??
-    manualArtist
+  let profile = sanityArtist
+  if (manualArtist) {
+    profile = {
+      ...sanityArtist,
+      ...manualArtist,
+    }
+  }
 
   if (!profile) {
     return <div>Artist not found</div>
@@ -93,7 +97,6 @@ export default async function ArtistPage({
   const fallbackInstagramUrl = fallbackInstagramBySlug[normalizedName]
   const mergedSocialLinks = {
     ...(profile.socialLinks ?? {}),
-    ...(manualArtist?.socialLinks ?? {}),
   }
   if (fallbackInstagramUrl && !mergedSocialLinks.instagram) {
     mergedSocialLinks.instagram = fallbackInstagramUrl
