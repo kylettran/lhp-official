@@ -185,25 +185,19 @@ export default async function ArtistPage({
         <p className="mb-6 text-lg text-gray-600">{profile.role}</p>
       )}
 
-      <section className="mb-8 space-y-6">
-        <div className="flex items-end justify-between gap-4">
+      <section className="mb-8">
+        <div className="space-y-6 text-center">
           <h2 className="text-xl font-semibold text-neutral-900">About</h2>
-          <span className="text-xs uppercase tracking-[0.4em] text-neutral-500">Profile</span>
-        </div>
-        <div className="grid gap-6 lg:grid-cols-2">
-          {biographySegments.map((segment, index) => (
-            <article
-              key={`bio-segment-${index}`}
-              className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111025] to-[#1b1630] p-6 shadow-lg shadow-[#150c2d]/30"
-            >
-              {index === 0 && (
-                <p className="mb-3 text-xs uppercase tracking-[0.5em] text-[#78bfff]">
-                  Origins
-                </p>
-              )}
-              <p className="text-base leading-relaxed text-neutral-200">{segment}</p>
-            </article>
-          ))}
+          <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-gradient-to-br from-[#111025] to-[#1b1630] p-8 text-center text-neutral-200 shadow-lg shadow-[#150c2d]/30">
+            {biographySegments.map((segment, index) => (
+              <p
+                key={`bio-segment-${index}`}
+                className="text-base leading-relaxed text-neutral-200"
+              >
+                {segment}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
