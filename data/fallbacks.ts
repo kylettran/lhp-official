@@ -119,7 +119,7 @@ lynx combinator exists so they don't.`,
       instagram: 'https://www.instagram.com/rawtakem',
       website: 'https://rawtakem.com',
     },
-    showOnWof: true,
+    showOnWof: false,
   },
   {
     _id: 'manual-wetball909',
@@ -367,7 +367,7 @@ export interface ImpactEventStat {
 }
 
 export const curatedImpactEventStats: ImpactEventStat[] = [
-  { slug: '2k24-rager', attendees: 107 },
+  { slug: '2k24-rager', attendees: 25 },
   { slug: '2k25-sundown', attendees: 25 },
   { slug: '2k25-rager', attendees: 65 },
   { slug: 'loves-and-lones', attendees: 150 },
