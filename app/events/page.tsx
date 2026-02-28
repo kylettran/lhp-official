@@ -20,9 +20,11 @@ const pastEventsQuery = groq`
 `
 
 export default async function PastEventsPage() {
+  const excludedSlugs = new Set(['lion-heart-past-event'])
   const pastEvents = await sanityClient.fetch(pastEventsQuery)
   const fallbackEventsToAdd = pastEventFallbackList.filter(
     (fallback) =>
+      !excludedSlugs.has(fallback.slug) &&
       !pastEvents.some((event: any) => event.slug?.current === fallback.slug)
   )
   const combinedPastEvents = [
@@ -31,7 +33,9 @@ export default async function PastEventsPage() {
       ...event,
       slug: { current: event.slug },
     })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  ]
+    .filter((event) => !excludedSlugs.has(event.slug?.current))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   const impactEvents = curatedImpactEventStats.map((impact) => {
     const fallback = pastEventFallbacks[impact.slug]
     return {

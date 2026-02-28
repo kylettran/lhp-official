@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import { Playfair_Display, Space_Grotesk } from 'next/font/google'
@@ -57,6 +58,10 @@ export default async function EventPage({
 }) {
   const { slug } = await params
 
+  if (slug === 'lion-heart-past-event') {
+    notFound()
+  }
+
   const event = await sanityClient.fetch(eventBySlugQuery, {
     slug,
   })
@@ -72,7 +77,10 @@ export default async function EventPage({
     return <div>Event not found</div>
   }
 
-  const timelineEvents = Array.isArray(allEvents) ? [...allEvents] : []
+  const excludedSlugs = new Set(['lion-heart-past-event'])
+  const timelineEvents = Array.isArray(allEvents)
+    ? allEvents.filter((item: any) => !excludedSlugs.has(item.slug?.current))
+    : []
   const timelineSlugs = new Set<string>()
   timelineEvents.forEach((item: any) => {
     if (item.slug?.current) {
@@ -80,7 +88,7 @@ export default async function EventPage({
     }
   })
   pastEventFallbackList.forEach((fallback) => {
-    if (!timelineSlugs.has(fallback.slug)) {
+    if (!excludedSlugs.has(fallback.slug) && !timelineSlugs.has(fallback.slug)) {
       timelineEvents.push({
         title: fallback.title,
         slug: { current: fallback.slug },
