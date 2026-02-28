@@ -266,116 +266,104 @@
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
-
-.impact-chart {
+.impact-visual {
   margin-top: 2rem;
   display: grid;
-  gap: 0.9rem;
+  gap: 1.75rem;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.impact-row {
-  display: block;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.8rem 0.9rem;
-  text-decoration: none;
-  transition: border-color 180ms ease, transform 180ms ease;
+.impact-donut {
+  width: min(260px, 65vw);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.25), 0 10px 40px rgba(24, 35, 80, 0.6);
+  background: conic-gradient(#3f92f6 0%, #3f92f6 100%);
 }
 
-.impact-row:hover {
-  border-color: rgba(93, 168, 255, 0.75);
-  transform: translateY(-1px);
-}
-
-.impact-row--featured {
-  border-color: rgba(93, 168, 255, 0.85);
-  background: rgba(59, 138, 227, 0.12);
-}
-
-.impact-row-meta {
+.impact-donut-inner {
+  position: absolute;
+  inset: 24%;
+  border-radius: 50%;
+  background: #0f0b1f;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.6rem;
-  margin-bottom: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.impact-event-name {
-  color: #f3f8ff;
+.impact-donut-number {
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.impact-donut-subtext {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 0.25rem;
+}
+
+.impact-legend {
+  display: grid;
+  gap: 1rem;
+}
+
+.impact-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.impact-legend-row:hover {
+  border-color: rgba(93, 168, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.impact-legend-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background: #3f92f6;
+  box-shadow: 0 0 12px rgba(63, 146, 246, 0.6);
+}
+
+.impact-legend-name {
   font-size: 0.95rem;
   font-weight: 600;
+  color: #f8fbff;
 }
 
-.impact-event-count {
-  color: #9ed2ff;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.impact-bar-track {
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.impact-bar-fill {
-  display: block;
-  height: 100%;
-  width: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #3f92f6 0%, #69bcff 100%);
-  box-shadow: 0 0 18px rgba(69, 161, 255, 0.45);
-  animation: impact-bar-grow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: var(--bar-delay, 0ms);
-}
-
-.impact-row--featured .impact-bar-fill {
-  background: linear-gradient(90deg, #2d89f4 0%, #7dd3ff 100%);
-  box-shadow: 0 0 24px rgba(93, 189, 255, 0.6);
-}
-
-.impact-breakdown {
-  margin-top: 1.2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  padding-top: 0.9rem;
-}
-
-.impact-breakdown summary {
-  cursor: pointer;
-  list-style: none;
-  color: #9ed2ff;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+.impact-legend-count {
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 0.15rem;
 }
 
-.impact-breakdown summary::-webkit-details-marker {
-  display: none;
-}
-
-.impact-cards {
-  margin-top: 0.9rem;
-  display: grid;
-  gap: 0.7rem;
-}
-
-.impact-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.8rem 0.9rem;
-  text-decoration: none;
-}
-
-.impact-card-name {
-  color: #fff;
-  font-weight: 600;
+.impact-legend-percent {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #3b82f6;
 }
 
 .impact-card-count {

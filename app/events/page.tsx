@@ -1,7 +1,6 @@
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
-import type { CSSProperties } from 'react'
 import {
   curatedImpactEventStats,
   pastEventFallbackList,
@@ -37,15 +36,42 @@ export default async function PastEventsPage() {
     return {
       name: fallback?.title ?? impact.slug,
       attendees: impact.attendees,
-      href:
-        `/events/${impact.slug}`,
+      href: `/events/${impact.slug}`,
     }
   })
   const totalAttendees = impactEvents.reduce(
     (sum, event) => sum + event.attendees,
     0
   )
-  const maxAttendees = Math.max(...impactEvents.map((event) => event.attendees))
+  const colors = ['#3f92f6', '#fb7185', '#c084fc', '#38bdf8']
+  const segments = impactEvents.map((event, index) => {
+    const percent = totalAttendees
+      ? (event.attendees / totalAttendees) * 100
+      : 0
+    return {
+      ...event,
+      color: colors[index % colors.length],
+      percent,
+    }
+  })
+  const donutGradient = (() => {
+    if (!totalAttendees) {
+      return 'conic-gradient(#3f92f6 0%, #3f92f6 100%)'
+    }
+
+    let cursor = 0
+    const stops: string[] = []
+    segments.forEach((segment) => {
+      const start = cursor
+      const end = cursor + segment.percent
+      stops.push(`${segment.color} ${start}% ${end}%`)
+      cursor = end
+    })
+    if (cursor < 100) {
+      stops.push(`rgba(255,255,255,0.08) ${cursor}% 100%`)
+    }
+    return `conic-gradient(${stops.join(', ')})`
+  })()
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
@@ -69,46 +95,37 @@ export default async function PastEventsPage() {
           <p className="impact-total-label">Total Event Attendees</p>
         </div>
 
-        <div className="impact-chart" aria-label="Event attendee bar chart">
-          {impactEvents.map((event, index) => {
-            const widthPercentage = (event.attendees / maxAttendees) * 100
-            return (
-                <a
-                  key={event.name}
-                  href={event.href}
-                  className="impact-row"
-                >
-                <div className="impact-row-meta">
-                  <span className="impact-event-name">{event.name}</span>
-                  <span className="impact-event-count">{event.attendees}</span>
+        <div className="impact-visual">
+          <div className="impact-donut" style={{ background: donutGradient }}>
+            <div className="impact-donut-inner">
+              <p className="impact-donut-number">{totalAttendees}+</p>
+              <p className="impact-donut-subtext">Attendees</p>
+            </div>
+          </div>
+          <div className="impact-legend">
+            {segments.map((segment) => (
+              <Link
+                key={segment.name}
+                href={segment.href}
+                className="impact-legend-row"
+              >
+                <span
+                  className="impact-legend-swatch"
+                  style={{ backgroundColor: segment.color }}
+                />
+                <div>
+                  <p className="impact-legend-name">{segment.name}</p>
+                  <p className="impact-legend-count">
+                    {segment.attendees} attendees
+                  </p>
                 </div>
-                <div className="impact-bar-track">
-                  <span
-                    className="impact-bar-fill"
-                    style={
-                      {
-                        '--bar-width': `${widthPercentage}%`,
-                        '--bar-delay': `${index * 140}ms`,
-                      } as CSSProperties
-                    }
-                  />
-                </div>
-              </a>
-            )
-          })}
-        </div>
-
-        <details className="impact-breakdown">
-          <summary>Event Breakdown</summary>
-          <div className="impact-cards">
-            {impactEvents.map((event) => (
-              <a key={`${event.name}-card`} href={event.href} className="impact-card">
-                <p className="impact-card-name">{event.name}</p>
-                <p className="impact-card-count">{event.attendees} attendees</p>
-              </a>
+                <span className="impact-legend-percent">
+                  {segment.percent.toFixed(1)}%
+                </span>
+              </Link>
             ))}
           </div>
-        </details>
+        </div>
       </section>
 
       <div className="mt-12 flex flex-col items-center gap-4">
