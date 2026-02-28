@@ -59,11 +59,11 @@ export default async function ArtistPage({
   const { slug } = await params
 
   const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug })
-  const fallbackArtist = manualArtistProfilesBySlug[slug]
+  const manualArtist = manualArtistProfilesBySlug[slug]
 
   const profile =
     sanityArtist ??
-    fallbackArtist
+    manualArtist
 
   if (!profile) {
     return <div>Artist not found</div>
@@ -92,6 +92,7 @@ export default async function ArtistPage({
   const fallbackInstagramUrl = fallbackInstagramBySlug[normalizedName]
   const mergedSocialLinks = {
     ...(profile.socialLinks ?? {}),
+    ...(manualArtist?.socialLinks ?? {}),
   }
   if (fallbackInstagramUrl && !mergedSocialLinks.instagram) {
     mergedSocialLinks.instagram = fallbackInstagramUrl
@@ -177,7 +178,7 @@ export default async function ArtistPage({
       <section className="mb-8">
         <h2 className="mb-3 text-xl font-semibold text-neutral-900">About</h2>
         <p className="text-neutral-700">
-          {profile.bio || 'Bio coming soon.'}
+          {manualArtist?.bio ?? profile.bio ?? 'Bio coming soon.'}
         </p>
       </section>
 

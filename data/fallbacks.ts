@@ -20,6 +20,33 @@ export interface ManualArtistProfile {
 
 const manualProfiles: ManualArtistProfile[] = [
   {
+    _id: 'manual-ayeare',
+    name: 'Aye.Are',
+    slug: { current: 'ayeare' },
+    role: 'Co-Founder/Artist',
+    bio: `i didn't go to school for this. i taught myself — chatbots, 
+voice agents, automation tools, websites shipped on vercel. 
+zapier led to chatgpt led to claude code led to realizing 
+i could build real things that worked.
+
+then i met a family. their kids were half my age — curious, 
+energetic, firing questions at me nonstop. and something clicked.
+
+i thought about who i was at 16. junior year. AP classes. 
+track and field. already racing against time without knowing 
+where i was running. nobody handed me a roadmap. i had to 
+find that years later, alone.
+
+those kids didn't have to wait that long.
+
+lynx combinator exists so they don't.`,
+    socialLinks: {
+      instagram: 'https://www.instagram.com/aye.are',
+    },
+    showOnWof: false,
+    showOnTeam: false,
+  },
+  {
     _id: 'manual-rozez',
     name: '_.Rozez._',
     slug: { current: 'rozez' },
