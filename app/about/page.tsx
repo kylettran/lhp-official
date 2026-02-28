@@ -74,7 +74,7 @@ export default function AboutPage() {
             </div>
           </div>
           <p className="text-lg text-white/80">
-            Behind the scenes, King Heart operates like a family—curating rooms where DJs, artists, and creatives can grow together. We believe in building culture that lasts.
+            Behind the scenes, Lion Heart operates like a family—curating rooms where DJs, artists, and creatives can grow together. We believe in building culture that lasts.
           </p>
           <div className="text-lg font-semibold text-[#78bfff]">Welcome to Lion Heart.</div>
         </section>
