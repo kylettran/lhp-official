@@ -2,6 +2,11 @@ import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
 import type { CSSProperties } from 'react'
+import {
+  curatedImpactEventStats,
+  pastEventFallbackList,
+  pastEventFallbacks,
+} from '@/data/fallbacks'
 
 const pastEventsQuery = groq`
   *[_type == "event" && status == "past"]
@@ -16,33 +21,30 @@ const pastEventsQuery = groq`
 
 export default async function PastEventsPage() {
   const pastEvents = await sanityClient.fetch(pastEventsQuery)
-  const loveSlug = 'loves-and-lones'
-  const hasLoveEvent = pastEvents.some(
-    (event: any) => event.slug?.current === loveSlug
+  const fallbackEventsToAdd = pastEventFallbackList.filter(
+    (fallback) =>
+      !pastEvents.some((event: any) => event.slug?.current === fallback.slug)
   )
-  const impactEvents = [
-    {
-      name: '2K24 Rager',
-      attendees: 20,
-      href: '/rager-2k24.html',
-    },
-    {
-      name: '2K25 Sundown',
-      attendees: 25,
-      href: '/sundown-2k25.html',
-    },
-    {
-      name: '2K25 Rager',
-      attendees: 65,
-      href: '/rager-2k25.html',
-    },
-    {
-      name: 'Lovers & Loners',
-      attendees: 150,
-      href: '/events/loves-and-lones',
-    },
-  ]
-  const totalAttendees = 260
+  const combinedPastEvents = [
+    ...pastEvents,
+    ...fallbackEventsToAdd.map((event) => ({
+      ...event,
+      slug: { current: event.slug },
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const impactEvents = curatedImpactEventStats.map((impact) => {
+    const fallback = pastEventFallbacks[impact.slug]
+    return {
+      name: fallback?.title ?? impact.slug,
+      attendees: impact.attendees,
+      href:
+        `/events/${impact.slug}`,
+    }
+  })
+  const totalAttendees = impactEvents.reduce(
+    (sum, event) => sum + event.attendees,
+    0
+  )
   const maxAttendees = Math.max(...impactEvents.map((event) => event.attendees))
 
   return (
@@ -71,11 +73,11 @@ export default async function PastEventsPage() {
           {impactEvents.map((event, index) => {
             const widthPercentage = (event.attendees / maxAttendees) * 100
             return (
-              <a
-                key={event.name}
-                href={event.href}
-                className={`impact-row ${event.name === 'Lovers & Loners' ? 'impact-row--featured' : ''}`}
-              >
+                <a
+                  key={event.name}
+                  href={event.href}
+                  className="impact-row"
+                >
                 <div className="impact-row-meta">
                   <span className="impact-event-name">{event.name}</span>
                   <span className="impact-event-count">{event.attendees}</span>
@@ -110,20 +112,7 @@ export default async function PastEventsPage() {
       </section>
 
       <div className="mt-12 flex flex-col items-center gap-4">
-        {!hasLoveEvent && (
-          <Link
-            href="/events/loves-and-lones"
-            className="w-full max-w-2xl rounded-2xl border border-rose-200 bg-[#fff5f7] px-6 py-5 text-center transition hover:-translate-y-1 hover:shadow-lg"
-          >
-            <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
-              2/12/2026
-            </p>
-            <p className="mt-2 text-lg font-semibold text-neutral-900">
-              Lovers and Loners
-            </p>
-          </Link>
-        )}
-        {pastEvents.map((event: any) => (
+        {combinedPastEvents.map((event: any) => (
           <Link
             key={event.slug.current}
             href={`/events/${event.slug.current}`}

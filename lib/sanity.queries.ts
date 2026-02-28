@@ -6,6 +6,7 @@ export const allArtistsQuery = groq`
     name,
     slug,
     role,
+    socialLinks,
     bio,
     "image": coalesce(photo, image) {
       asset->{

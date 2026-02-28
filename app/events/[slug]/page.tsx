@@ -2,6 +2,10 @@ import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import { Playfair_Display, Space_Grotesk } from 'next/font/google'
 import EventTimelineToggle from '@/components/event-timeline-toggle'
+import {
+  pastEventFallbackList,
+  pastEventFallbacks,
+} from '@/data/fallbacks'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -59,42 +63,32 @@ export default async function EventPage({
 
   const allEvents = await sanityClient.fetch(allEventsQuery)
 
-  const lovesAndLonesFallback = {
-    title: 'Lovers and Loners',
-    date: '2026-02-12T21:00:00.000Z',
-    status: 'past',
-    location: 'The Continental Room · Fullerton, CA',
-    description:
-      'A love-forward night with AYE.ARE and FRESE on stage, plus DJ sets that kept the room glowing until closing.',
-    stripeProductId: null,
-    ticketUrl: null,
-    instagramUrl: null,
-    teamMessage:
-      'Thank you for making Lovers and Loners unforgettable. Every set, every lyric, every dance move made the room feel like home.',
-    posterImage: null,
-    gallery: [],
-    videoHighlights: [],
-    attendees: [],
-  }
-
+  const fallbackEvent = pastEventFallbacks[slug]
   const eventData =
-    event ?? (slug === 'loves-and-lones' ? lovesAndLonesFallback : null)
+    event ??
+    fallbackEvent
 
   if (!eventData) {
     return <div>Event not found</div>
   }
 
   const timelineEvents = Array.isArray(allEvents) ? [...allEvents] : []
-  const hasLoveInTimeline = timelineEvents.some(
-    (item: any) => item.slug?.current === 'loves-and-lones'
-  )
-  if (!hasLoveInTimeline) {
-    timelineEvents.push({
-      title: lovesAndLonesFallback.title,
-      slug: { current: 'loves-and-lones' },
-      date: lovesAndLonesFallback.date,
-    })
-  }
+  const timelineSlugs = new Set<string>()
+  timelineEvents.forEach((item: any) => {
+    if (item.slug?.current) {
+      timelineSlugs.add(item.slug.current)
+    }
+  })
+  pastEventFallbackList.forEach((fallback) => {
+    if (!timelineSlugs.has(fallback.slug)) {
+      timelineEvents.push({
+        title: fallback.title,
+        slug: { current: fallback.slug },
+        date: fallback.date,
+      })
+      timelineSlugs.add(fallback.slug)
+    }
+  })
 
   const eventDateValue = new Date(eventData.date).getTime()
   const earlierEvents = timelineEvents

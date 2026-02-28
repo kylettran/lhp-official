@@ -1,3 +1,4 @@
+import { manualArtistProfiles, normalizeName } from '@/data/fallbacks'
 import { sanityClient } from '@/lib/sanity.client'
 import { allArtistsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
@@ -8,32 +9,28 @@ type Artist = {
   slug?: { current?: string }
   role?: string
   image?: { asset?: { url?: string } }
+  imageUrl?: string
+  socialLinks?: Record<string, string>
 }
 
 export default async function WofPage() {
   const artists = (await sanityClient.fetch(allArtistsQuery)) as Artist[]
+  const manualProfiles = manualArtistProfiles.filter((profile) => profile.showOnWof)
+  const manualProfileById = new Map(manualProfiles.map((profile) => [profile._id, profile]))
+
+  const combinedEntries = [...artists, ...manualProfiles]
   const excludedTeamMembers = new Set(['ayeare', 'katherinedeleon', 'ap'])
-
-  const normalized = artists.map((artist) => {
-    const normalizedName = (artist.name ?? '')
-      .toLowerCase()
-      .replace(/[^a-z]/g, '')
-      .trim()
-    const isAyeAre = normalizedName === 'ayeare'
-    const isKat = normalizedName === 'katherinedeleon'
-    const isAp = normalizedName === 'ap'
-    const imageSrc = isAyeAre
-      ? '/assets/images/ar-portrait.png'
-      : isKat
-        ? '/assets/images/kat-pfp.png'
-        : isAp
-          ? '/assets/images/ap-portrait.png'
-          : artist.image?.asset?.url || null
-
+  const normalized = combinedEntries.map((artist) => {
+    const normalizedName = normalizeName(artist.name)
+    const manualProfile = manualProfileById.get(artist._id)
+    const profilePath = artist.slug?.current ? `/artists/${artist.slug.current}` : null
+    const imageSrc = manualProfile
+      ? null
+      : artist.imageUrl ?? artist.image?.asset?.url ?? null
     return {
       ...artist,
       normalizedName,
-      profilePath: artist.slug?.current ? `/artists/${artist.slug.current}` : null,
+      profilePath,
       imageSrc,
       isDj: (artist.role ?? '').toLowerCase().includes('dj'),
     }
@@ -49,6 +46,36 @@ export default async function WofPage() {
   const artistPlaceholders = Math.max(0, minimumArtistCards - artistEntries.length)
   const djPlaceholders = Math.max(0, minimumDjCards - djEntries.length)
 
+  const renderPortrait = (artist: typeof normalized[number]) => {
+    const portrait = artist.imageSrc ? (
+      <img
+        src={artist.imageSrc}
+        alt={artist.name ?? 'Artist portrait'}
+        className="mb-4 h-48 w-full rounded-lg object-cover object-center"
+      />
+    ) : (
+      <div className="mb-4 flex h-48 w-full flex-col items-center justify-center rounded-lg border border-dashed border-neutral-300 bg-white/70 text-center text-xs uppercase tracking-[0.3em] text-neutral-500">
+        <span>Portrait pending</span>
+        <p className="mt-1 text-[11px] text-neutral-400">Drop in the guest image soon.</p>
+      </div>
+    )
+    return artist.profilePath ? (
+      <Link href={artist.profilePath} className="block">
+        {portrait}
+      </Link>
+    ) : (
+      portrait
+    )
+  }
+
+  const renderCardFooter = (artist: typeof normalized[number]) => (
+    <div className="mt-3 flex items-center justify-between">
+      <span className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+        {artist.isDj ? 'DJ' : 'Artist'}
+      </span>
+    </div>
+  )
+
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
       <h1 className="mb-10 text-4xl font-bold">WOF</h1>
@@ -61,25 +88,7 @@ export default async function WofPage() {
               key={`wof-artist-${artist._id}`}
               className="rounded-xl border p-6 shadow-sm"
             >
-              {artist.profilePath && artist.imageSrc ? (
-                <Link href={artist.profilePath} className="block">
-                  <img
-                    src={artist.imageSrc}
-                    alt={artist.name ?? 'Artist'}
-                    className="mb-4 h-48 w-full rounded-lg object-cover object-center"
-                  />
-                </Link>
-              ) : artist.imageSrc ? (
-                <img
-                  src={artist.imageSrc}
-                  alt={artist.name ?? 'Artist'}
-                  className="mb-4 h-48 w-full rounded-lg object-cover object-center"
-                />
-              ) : (
-                <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 text-gray-400">
-                  No Image
-                </div>
-              )}
+              {renderPortrait(artist)}
               {artist.profilePath ? (
                 <h3 className="text-2xl font-semibold">
                   <Link href={artist.profilePath} className="hover:underline">
@@ -89,7 +98,7 @@ export default async function WofPage() {
               ) : (
                 <h3 className="text-2xl font-semibold">{artist.name}</h3>
               )}
-              {artist.role && <p className="mt-1 text-sm text-gray-500">{artist.role}</p>}
+              {renderCardFooter(artist)}
             </article>
           ))}
           {Array.from({ length: artistPlaceholders }).map((_, index) => (
@@ -97,11 +106,11 @@ export default async function WofPage() {
               key={`wof-artist-placeholder-${index}`}
               className="rounded-xl border border-dashed bg-neutral-50 p-6"
             >
-              <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-dashed bg-white text-gray-400">
+              <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-dashed bg-white text-sm text-neutral-400">
                 Guest Slot
               </div>
               <h3 className="text-2xl font-semibold text-neutral-700">Special Guest</h3>
-              <p className="mt-1 text-sm text-gray-500">Coming soon</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.3em] text-neutral-500">Artist coming soon</p>
             </article>
           ))}
         </div>
@@ -115,25 +124,7 @@ export default async function WofPage() {
               key={`wof-dj-${artist._id}`}
               className="rounded-xl border p-6 shadow-sm"
             >
-              {artist.profilePath && artist.imageSrc ? (
-                <Link href={artist.profilePath} className="block">
-                  <img
-                    src={artist.imageSrc}
-                    alt={artist.name ?? 'DJ'}
-                    className="mb-4 h-48 w-full rounded-lg object-cover object-center"
-                  />
-                </Link>
-              ) : artist.imageSrc ? (
-                <img
-                  src={artist.imageSrc}
-                  alt={artist.name ?? 'DJ'}
-                  className="mb-4 h-48 w-full rounded-lg object-cover object-center"
-                />
-              ) : (
-                <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg bg-gray-100 text-gray-400">
-                  No Image
-                </div>
-              )}
+              {renderPortrait(artist)}
               {artist.profilePath ? (
                 <h3 className="text-2xl font-semibold">
                   <Link href={artist.profilePath} className="hover:underline">
@@ -143,7 +134,7 @@ export default async function WofPage() {
               ) : (
                 <h3 className="text-2xl font-semibold">{artist.name}</h3>
               )}
-              {artist.role && <p className="mt-1 text-sm text-gray-500">{artist.role}</p>}
+              {renderCardFooter(artist)}
             </article>
           ))}
           {Array.from({ length: djPlaceholders }).map((_, index) => (
@@ -151,11 +142,11 @@ export default async function WofPage() {
               key={`wof-dj-placeholder-${index}`}
               className="rounded-xl border border-dashed bg-neutral-50 p-6"
             >
-              <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-dashed bg-white text-gray-400">
+              <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-dashed bg-white text-sm text-neutral-400">
                 Partner Slot
               </div>
               <h3 className="text-2xl font-semibold text-neutral-700">Featured DJ</h3>
-              <p className="mt-1 text-sm text-gray-500">Coming soon</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.3em] text-neutral-500">Lineup coming soon</p>
             </article>
           ))}
         </div>
