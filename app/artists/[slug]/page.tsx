@@ -1,4 +1,3 @@
-import type { PageProps } from 'next'
 import type { ReactElement } from 'react'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
@@ -47,10 +46,15 @@ const fallbackInstagramBySlug: Record<string, string> = {
   katherinedeleon: 'https://www.instagram.com/katherinedeleon',
 }
 
+type ArtistPageProps = {
+  params: { slug: string }
+  searchParams?: { from?: string }
+}
+
 export default async function ArtistPage({
   params,
   searchParams,
-}: PageProps<{ slug: string }, { from?: string }>) {
+}: ArtistPageProps) {
   const { slug } = params
   const showBackToWof = searchParams?.from === 'wof'
 
