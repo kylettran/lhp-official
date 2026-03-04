@@ -44,7 +44,7 @@ This is his.`,
     _id: 'manual-rozez',
     name: '_.Rozez._',
     slug: { current: 'rozez' },
-    role: 'Guest DJ',
+    role: 'Guest Artist',
     bio: 'Underground selector _.Rozez._ fused ambient basslines with late-night club energy for the December 21, 2024 takeover.',
     image: {
       asset: {
@@ -117,10 +117,10 @@ This is his.`,
     bio: 'Wetball909 brought high-energy cadences to 2K25 Rager, layering percussion-heavy hooks that kept the floor bouncing.',
     image: {
       asset: {
-        url: '/assets/images/wetball909.png',
+        url: '/assets/images/wetball.jpg',
       },
     },
-    imageUrl: '/assets/images/wetball909.png',
+    imageUrl: '/assets/images/wetball.jpg',
     socialLinks: {
       instagram: 'https://www.instagram.com/wetball909',
     },
@@ -134,10 +134,10 @@ This is his.`,
     bio: 'Atom Black injected dark synthwave textures into 2K25 Rager, turning every breakdown into a cinematic moment.',
     image: {
       asset: {
-        url: '/assets/images/wetball909.png',
+        url: '/assets/images/atomblack.jpg',
       },
     },
-    imageUrl: '/assets/images/wetball909.png',
+    imageUrl: '/assets/images/atomblack.jpg',
     socialLinks: {
       instagram: 'https://www.instagram.com/atom.black',
     },
@@ -282,8 +282,8 @@ export interface PastEventFallback {
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
-  'loves-and-lones': {
-    slug: 'loves-and-lones',
+  'lovers-and-loners': {
+    slug: 'lovers-and-loners',
     title: 'Lovers & Loners',
     date: '2026-02-12T21:00:00.000Z',
     status: 'past',
@@ -374,11 +374,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     teamMessage:
       'Thanks for showing up hard, for being the heat of the floor, and for trusting Angel Iglesias to keep the pulse racing.',
     posterImage: { asset: { url: '/assets/images/lal9.png' } },
-    gallery: [
-      { asset: { url: '/assets/images/lal1.png' } },
-      { asset: { url: '/assets/images/lal2.png' } },
-      { asset: { url: '/assets/images/lal3.png' } },
-    ],
+    gallery: [{}, {}, {}],
     videoHighlights: [
       {
         title: 'Rager Aftermovie',
@@ -400,5 +396,5 @@ export const curatedImpactEventStats: ImpactEventStat[] = [
   { slug: '2k24-rager', attendees: 25 },
   { slug: '2k25-sundown', attendees: 25 },
   { slug: '2k25-rager', attendees: 65 },
-  { slug: 'loves-and-lones', attendees: 150 },
+  { slug: 'lovers-and-loners', attendees: 150 },
 ]
