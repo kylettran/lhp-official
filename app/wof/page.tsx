@@ -32,21 +32,26 @@ export default async function WofPage() {
       ? manualImage
       : artist.imageUrl ?? artist.image?.asset?.url ?? null
     const focus = manualProfile?.imageFocus ?? artist.imageFocus ?? '50% 50%'
+    const normalizedRole = (artist.role ?? '').toLowerCase()
     return {
       ...artist,
       normalizedName,
       profilePath,
       imageSrc,
       imageFocus: focus,
-      isDj: (artist.role ?? '').toLowerCase().includes('dj'),
+      isDj: normalizedRole.includes('dj'),
+      isHost: normalizedRole.includes('host'),
     }
   })
 
   const eligibleEntries = normalized.filter(
     (item) => !excludedTeamMembers.has(item.normalizedName)
   )
-  const artistEntries = eligibleEntries.filter((item) => !item.isDj)
+  const artistEntries = eligibleEntries.filter(
+    (item) => !item.isDj && !item.isHost
+  )
   const djEntries = eligibleEntries.filter((item) => item.isDj)
+  const hostEntries = eligibleEntries.filter((item) => item.isHost)
   const minimumArtistCards = Math.max(3, artistEntries.length)
   const minimumDjCards = Math.max(3, djEntries.length)
   const artistPlaceholders = Math.max(0, minimumArtistCards - artistEntries.length)
@@ -61,6 +66,7 @@ export default async function WofPage() {
 
   const sortedArtistEntries = sortByName(artistEntries)
   const sortedDjEntries = sortByName(djEntries)
+  const sortedHostEntries = sortByName(hostEntries)
 
   const renderPortrait = (artist: typeof normalized[number]) => {
     const imageStyle: CSSProperties = {
@@ -89,13 +95,16 @@ export default async function WofPage() {
     )
   }
 
-  const renderCardFooter = (artist: typeof normalized[number]) => (
-    <div className="mt-3 flex items-center justify-between">
-      <span className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
-        {artist.isDj ? 'DJ' : 'Artist'}
-      </span>
-    </div>
-  )
+  const renderCardFooter = (artist: typeof normalized[number]) => {
+    const label = artist.isHost ? 'Host' : artist.isDj ? 'DJ' : 'Artist'
+    return (
+      <div className="mt-3 flex items-center justify-between">
+        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+          {label}
+        </span>
+      </div>
+    )
+  }
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
@@ -168,6 +177,27 @@ export default async function WofPage() {
               </div>
               <h3 className="text-2xl font-semibold text-neutral-700">Featured DJ</h3>
               <p className="mt-1 text-xs uppercase tracking-[0.3em] text-neutral-500">Lineup coming soon</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="hosts-section" className="mt-16 scroll-mt-24">
+        <h2 className="text-2xl font-semibold text-neutral-900">Hosts</h2>
+        <div className="mt-6 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+          {sortedHostEntries.map((host) => (
+            <article key={`wof-host-${host._id}`} className="rounded-xl border p-6 shadow-sm">
+              {renderPortrait(host)}
+              {host.profilePath ? (
+                <h3 className="text-2xl font-semibold">
+                  <Link href={host.profilePath} className="hover:underline">
+                    {host.name}
+                  </Link>
+                </h3>
+              ) : (
+                <h3 className="text-2xl font-semibold">{host.name}</h3>
+              )}
+              {renderCardFooter(host)}
             </article>
           ))}
         </div>
