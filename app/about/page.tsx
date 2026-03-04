@@ -8,10 +8,10 @@ export default function AboutPage() {
           </p>
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-tight text-white">
-              Artist-led production rooted in vision, execution, and culture.
+              Artist-led production rooted in vision, execution, culture, and community.
             </h1>
             <p className="text-lg leading-relaxed text-white/80">
-              Lion Heart Productions is an artist-led event and creative production company built on vision, execution, and culture. Founded by Aye.Are &amp; Kat, LHP started as a way to throw intimate, intentional shows and quickly evolved into the premium experiences the community now looks forward to.
+              Founded by Aye.Are &amp; Kat, Lion Heart Productions started as intimate, intentional shows and now delivers premium, artist-led events the community keeps returning to.
             </p>
           </div>
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#181430] to-[#1f1338] p-8 shadow-2xl shadow-[#1f1338]/60 md:flex md:items-center md:justify-between">
@@ -26,31 +26,25 @@ export default function AboutPage() {
         <section className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-6 rounded-3xl border border-white/5 bg-white/5 p-8 backdrop-blur">
             <p className="text-2xl font-semibold text-white">Story</p>
-            <p className="text-lg text-white/80">
-              What began as intimate gatherings of 20 people quickly scaled into sold-out productions hosting over 150 attendees, proving that intention and quality always scale.
-            </p>
-            <p className="text-lg text-white/80">
-              From high-energy ragers to emotionally driven nights like Lovers &amp; Loners, every Lion Heart event is designed with purpose—melding music, visuals, and atmosphere into a premium experience.
-            </p>
-            <p className="text-lg text-white/80">
-              Behind the scenes, our team moves like a production house: every partnership, operation, creative direction, and lighting call is choreographed to shape unforgettable energy.
-            </p>
+            <ul className="space-y-3 text-lg text-white/80">
+              <li>• Started as intimate gatherings and scaled to sold-out, premium rooms.</li>
+              <li>• Every experience mixes music, visuals, and people with intentionality.</li>
+              <li>• Our production crew choreographs partnerships, ops, and lighting to elevate energy.</li>
+            </ul>
           </div>
 
           <div className="space-y-6 rounded-3xl border border-white/5 bg-gradient-to-b from-[#111025] to-[#1f1831] p-8">
             <p className="text-2xl font-semibold text-white">Values</p>
             <ul className="space-y-3 text-white/80">
-              <li>• Strategic partnerships that open new doors</li>
-              <li>• Operations that keep every beat flawless</li>
-              <li>• Creative direction that elevates visuals</li>
-              <li>• Lighting and atmosphere that guide the energy</li>
+              <li>Strategic collaborations that unlock new vibes</li>
+              <li>Operations that keep the beat flawless</li>
+              <li>Creative direction that elevates every visual</li>
+              <li>Lighting and atmosphere that guide the energy</li>
             </ul>
-            <div className="space-y-2">
-              <p className="text-sm uppercase tracking-[0.6em] text-[#8fb0ff]">Growth over hype</p>
-              <p className="text-lg text-white/90">
-                Lion Heart Productions is built on earning every milestone and building culture that lasts. This isn’t just an event company—it’s a movement of creators, artists, and supporters who believe in doing things at a higher level.
-              </p>
-            </div>
+            <p className="text-sm uppercase tracking-[0.6em] text-[#8fb0ff]">Growth over hype</p>
+            <p className="text-lg text-white/90">
+              Lion Heart is a movement—creators, artists, and supporters earning culture that lasts.
+            </p>
           </div>
         </section>
 
@@ -58,7 +52,7 @@ export default function AboutPage() {
           <div className="space-y-3">
             <p className="text-2xl font-semibold text-white">What we deliver</p>
             <p className="text-lg text-white/80">
-              From charged night ragers to emotionally driven themed rooms, each Lion Heart event is choreographed across music, visuals, and people, so the atmosphere feels deeper than the headline.
+              Charged ragers and cinematic themed rooms, every Lion Heart event choreographs music, visuals, and people.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
