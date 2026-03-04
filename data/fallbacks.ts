@@ -374,7 +374,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     teamMessage:
       'Thanks for showing up hard, for being the heat of the floor, and for trusting Angel Iglesias to keep the pulse racing.',
     posterImage: { asset: { url: '/assets/images/lal9.png' } },
-    gallery: [{}, {}, {}],
+    gallery: [],
     videoHighlights: [
       {
         title: 'Rager Aftermovie',
