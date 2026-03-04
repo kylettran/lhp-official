@@ -46,15 +46,10 @@ const fallbackInstagramBySlug: Record<string, string> = {
   katherinedeleon: 'https://www.instagram.com/katherinedeleon',
 }
 
-type ArtistPageProps = {
-  params: { slug: string }
-  searchParams?: { from?: string }
-}
-
 export default async function ArtistPage({
   params,
   searchParams,
-}: ArtistPageProps) {
+}: { params: any; searchParams?: any }) {
   const { slug } = params
   const showBackToWof = searchParams?.from === 'wof'
 
