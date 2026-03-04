@@ -81,7 +81,7 @@ export default async function WofPage() {
       </div>
     )
     return artist.profilePath ? (
-      <Link href={artist.profilePath} className="block">
+      <Link href={`${artist.profilePath}?from=wof`} className="block">
         {portrait}
       </Link>
     ) : (

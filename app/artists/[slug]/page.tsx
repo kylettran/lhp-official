@@ -48,10 +48,13 @@ const fallbackInstagramBySlug: Record<string, string> = {
 
 export default async function ArtistPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams?: { from?: string }
 }) {
   const { slug } = await params
+  const showBackToWof = searchParams?.from === 'wof'
 
   const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug })
   const manualArtist = manualArtistProfilesBySlug[slug]
@@ -151,14 +154,24 @@ export default async function ArtistPage({
   const imageObjectPosition =
     profile.imageFocus ?? (slug === 'kt' ? '50% 35%' : '50% 50%')
 
+  const returnLink = showBackToWof
+    ? {
+        href: '/wof#artists-section',
+        label: slug === 'angel-iglesias' ? 'Back to Team' : 'Back to WOF',
+      }
+    : {
+        href: '/artists',
+        label: 'Back to Team',
+      }
+
   return (
       <main className="mx-auto max-w-3xl px-4 py-16">
         <div className="mb-8 flex flex-wrap items-center gap-3">
         <Link
-          href="/artists"
+          href={returnLink.href}
           className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 hover:bg-neutral-100"
         >
-          Back to Team
+          {returnLink.label}
         </Link>
       </div>
 
