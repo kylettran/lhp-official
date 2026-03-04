@@ -207,10 +207,10 @@ He joined Lovers & Loners as a surprise collaborator, making the night feel like
     bio: 'Angel Iglesias hosted 2K25 Rager, guiding the night with sharp energy and a community-first mindset.',
     image: {
       asset: {
-        url: '/assets/images/angel iglesias.png',
+        url: '/assets/images/angel-iglesias.png',
       },
     },
-    imageUrl: '/assets/images/angel iglesias.png',
+    imageUrl: '/assets/images/angel-iglesias.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/angel.iglesias00',
       website: 'https://angeliglesias.com',
