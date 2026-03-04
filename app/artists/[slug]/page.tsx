@@ -50,10 +50,10 @@ export default async function ArtistPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
   searchParams?: { from?: string }
 }) {
-  const { slug } = await params
+  const { slug } = params
   const showBackToWof = searchParams?.from === 'wof'
 
   const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug })
