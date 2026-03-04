@@ -157,7 +157,7 @@ export default async function ArtistPage({
   const returnLink = showBackToWof
     ? {
         href: '/wof#artists-section',
-        label: slug === 'angel-iglesias' ? 'Back to Team' : 'Back to WOF',
+        label: 'Back to WOF',
       }
     : {
         href: '/artists',
