@@ -2,6 +2,7 @@ import { manualArtistProfiles, normalizeName } from '@/data/fallbacks'
 import { sanityClient } from '@/lib/sanity.client'
 import { allArtistsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 
 type Artist = {
   _id: string
@@ -11,6 +12,7 @@ type Artist = {
   image?: { asset?: { url?: string } }
   imageUrl?: string
   socialLinks?: Record<string, string>
+  imageFocus?: string
 }
 
 export default async function WofPage() {
@@ -24,14 +26,18 @@ export default async function WofPage() {
     const normalizedName = normalizeName(artist.name)
     const manualProfile = manualProfileById.get(artist._id)
     const profilePath = artist.slug?.current ? `/artists/${artist.slug.current}` : null
+    const manualImage =
+      manualProfile?.imageUrl ?? manualProfile?.image?.asset?.url ?? null
     const imageSrc = manualProfile
-      ? null
+      ? manualImage
       : artist.imageUrl ?? artist.image?.asset?.url ?? null
+    const focus = manualProfile?.imageFocus ?? artist.imageFocus ?? '50% 50%'
     return {
       ...artist,
       normalizedName,
       profilePath,
       imageSrc,
+      imageFocus: focus,
       isDj: (artist.role ?? '').toLowerCase().includes('dj'),
     }
   })
@@ -46,12 +52,27 @@ export default async function WofPage() {
   const artistPlaceholders = Math.max(0, minimumArtistCards - artistEntries.length)
   const djPlaceholders = Math.max(0, minimumDjCards - djEntries.length)
 
+  const sortByName = <T extends { normalizedName?: string }>(items: T[]) =>
+    [...items].sort((a, b) =>
+      (a.normalizedName ?? '').localeCompare(b.normalizedName ?? '', undefined, {
+        sensitivity: 'base',
+      })
+    )
+
+  const sortedArtistEntries = sortByName(artistEntries)
+  const sortedDjEntries = sortByName(djEntries)
+
   const renderPortrait = (artist: typeof normalized[number]) => {
+    const imageStyle: CSSProperties = {
+      objectPosition: artist.imageFocus ?? '50% 50%',
+    }
+
     const portrait = artist.imageSrc ? (
       <img
         src={artist.imageSrc}
         alt={artist.name ?? 'Artist portrait'}
         className="mb-4 h-48 w-full rounded-lg object-cover object-center"
+        style={imageStyle}
       />
     ) : (
       <div className="mb-4 flex h-48 w-full flex-col items-center justify-center rounded-lg border border-dashed border-neutral-300 bg-white/70 text-center text-xs uppercase tracking-[0.3em] text-neutral-500">
@@ -83,7 +104,7 @@ export default async function WofPage() {
       <section id="artists-section" className="mb-12 scroll-mt-24">
         <h2 className="text-2xl font-semibold text-neutral-900">Artists</h2>
         <div className="mt-6 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {artistEntries.map((artist) => (
+          {sortedArtistEntries.map((artist) => (
             <article
               key={`wof-artist-${artist._id}`}
               className="rounded-xl border p-6 shadow-sm"
@@ -119,7 +140,7 @@ export default async function WofPage() {
       <section id="djs-section" className="scroll-mt-24">
         <h2 className="text-2xl font-semibold text-neutral-900">DJs</h2>
         <div className="mt-6 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {djEntries.map((artist) => (
+          {sortedDjEntries.map((artist) => (
             <article
               key={`wof-dj-${artist._id}`}
               className="rounded-xl border p-6 shadow-sm"

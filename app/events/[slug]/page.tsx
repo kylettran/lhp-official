@@ -3,6 +3,9 @@ import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import { Playfair_Display, Space_Grotesk } from 'next/font/google'
 import EventTimelineToggle from '@/components/event-timeline-toggle'
+import EventGallery from '@/components/event-gallery'
+import PosterViewer from '@/components/poster-viewer'
+import VideoHighlightCard from '@/components/video-highlight-card'
 import {
   pastEventFallbackList,
   pastEventFallbacks,
@@ -131,6 +134,15 @@ export default async function EventPage({
     eventData.videoHighlights.length > 0
   const hasAttendees =
     Array.isArray(eventData.attendees) && eventData.attendees.length > 0
+  const recapLink = eventData.instagramRecapUrl ?? eventData.instagramUrl
+  const viewLink = eventData.instagramViewUrl ?? eventData.instagramUrl
+  const venueLink = eventData.venueLink
+  const attendeeCount =
+    typeof eventData.attendeesCount === 'number'
+      ? eventData.attendeesCount
+      : hasAttendees
+      ? eventData.attendees.length
+      : '—'
 
   return (
     <main className={`${spaceGrotesk.className} bg-[#fffdfd]`}>
@@ -155,9 +167,9 @@ export default async function EventPage({
                 {eventData.description}
               </p>
               <div className="flex flex-wrap gap-3">
-                {eventData.instagramUrl && (
+                {recapLink && (
                   <a
-                    href={eventData.instagramUrl}
+                    href={recapLink}
                     className="inline-flex items-center justify-center rounded-full bg-rose-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-rose-400"
                     rel="noreferrer"
                     target="_blank"
@@ -182,12 +194,26 @@ export default async function EventPage({
                 )}
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-rose-200 bg-white/90 p-4">
-                  <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
-                    Venue
-                  </p>
-                  <p className="mt-2 text-sm text-neutral-700">{eventData.location}</p>
-                </div>
+                {venueLink ? (
+                  <a
+                    href={venueLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-2xl border border-rose-200 bg-white/90 p-4 transition hover:border-rose-300"
+                  >
+                    <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
+                      Venue
+                    </p>
+                    <p className="mt-2 text-sm text-neutral-700">{eventData.location}</p>
+                  </a>
+                ) : (
+                  <div className="rounded-2xl border border-rose-200 bg-white/90 p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
+                      Venue
+                    </p>
+                    <p className="mt-2 text-sm text-neutral-700">{eventData.location}</p>
+                  </div>
+                )}
                 <div className="rounded-2xl border border-rose-200 bg-white/90 p-4">
                   <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
                     Date
@@ -205,21 +231,18 @@ export default async function EventPage({
             </div>
             <div className="relative">
               {eventData.posterImage?.asset?.url ? (
-                <div className="overflow-hidden rounded-3xl border border-rose-200 bg-white shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)]">
-                  <img
-                    src={eventData.posterImage.asset.url}
-                    alt={`${eventData.title} poster`}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
+                <PosterViewer
+                  imageUrl={eventData.posterImage.asset.url}
+                  title={eventData.title}
+                />
               ) : (
                 <div className="flex h-full min-h-[360px] items-center justify-center rounded-3xl border border-dashed border-rose-300 bg-[#fff5f7] p-10 text-center text-sm text-neutral-500">
                   Add the event poster image in Sanity to spotlight the vibe.
                 </div>
               )}
-              {eventData.instagramUrl && (
+              {viewLink && (
                 <a
-                  href={eventData.instagramUrl}
+                  href={viewLink}
                   className="absolute -bottom-6 left-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg"
                   rel="noreferrer"
                   target="_blank"
@@ -239,35 +262,20 @@ export default async function EventPage({
           </h2>
           <p className="text-sm text-neutral-500">Highlights from the night</p>
         </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8">
           {hasGallery ? (
-            eventData.gallery.map((image: any, index: number) => (
-              <div
-                key={`${image?.asset?.url ?? 'photo'}-${index}`}
-                className="group relative overflow-hidden rounded-2xl border border-rose-100 bg-white"
-              >
-                {image?.asset?.url ? (
-                  <img
-                    src={image.asset.url}
-                    alt={`${eventData.title} gallery ${index + 1}`}
-                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="flex h-64 items-center justify-center text-sm text-neutral-400">
-                    Add photo
-                  </div>
-                )}
-              </div>
-            ))
+            <EventGallery images={eventData.gallery} />
           ) : (
-            Array.from({ length: 3 }).map((_, index) => (
-              <div
-                key={`placeholder-${index}`}
-                className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-rose-200 bg-[#fff5f7] text-sm text-neutral-400"
-              >
-                Upload photo highlight
-              </div>
-            ))
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div
+                  key={`placeholder-${index}`}
+                  className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-rose-200 bg-[#fff5f7] text-sm text-neutral-400"
+                >
+                  Upload photo highlight
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </section>
@@ -286,21 +294,10 @@ export default async function EventPage({
             <div className="grid gap-4 md:grid-cols-2">
               {hasVideos ? (
                 eventData.videoHighlights.map((video: any, index: number) => (
-                  <a
+                  <VideoHighlightCard
                     key={`${video?.url ?? 'video'}-${index}`}
-                    href={video?.url ?? '#'}
-                    className="group rounded-2xl border border-white/15 bg-white/5 p-5 transition hover:border-white/40 hover:bg-white/10"
-                  >
-                    <p className="text-xs uppercase tracking-[0.2em] text-rose-200">
-                      Highlight {index + 1}
-                    </p>
-                    <p className="mt-3 text-lg font-semibold">
-                      {video?.title ?? 'Add video title'}
-                    </p>
-                    <p className="mt-6 text-xs uppercase tracking-[0.2em] text-white/60">
-                      Watch clip
-                    </p>
-                  </a>
+                    highlight={video}
+                  />
                 ))
               ) : (
                 Array.from({ length: 2 }).map((_, index) => (
@@ -333,7 +330,7 @@ export default async function EventPage({
               Attendees
             </h3>
             <p className="mt-2 text-3xl font-semibold text-neutral-900">
-              {hasAttendees ? eventData.attendees.length : '—'}
+              {attendeeCount}
             </p>
             <p className="mt-2 text-sm text-neutral-500">
               Community members who showed love.

@@ -32,17 +32,11 @@ const socialIconMap: Record<string, ReactElement> = {
     </svg>
   ),
   linkedin: (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className="h-6 w-6 text-neutral-900"
-      role="img"
-    >
-      <path
-        d="M4.98 3.5C4.98 2.12 3.86 1 2.5 1S.02 2.12.02 3.5 1.14 6 2.5 6 4.98 4.88 4.98 3.5zM2.5 7H5V21H2.5zm5.5 0H13V12.5c0 3.19 4 3.44 4 0V7H22V21h-2.5V14c0-2.16-2.5-2-2.5 0V21H13.5z"
-        fill="currentColor"
-      />
-    </svg>
+    <img
+      src="/assets/images/linkedin.png"
+      alt="LinkedIn"
+      className="h-6 w-6 object-contain"
+    />
   ),
 }
 
@@ -101,7 +95,17 @@ export default async function ArtistPage({
   if (fallbackInstagramUrl && !mergedSocialLinks.instagram) {
     mergedSocialLinks.instagram = fallbackInstagramUrl
   }
-  const socialEntries = Object.entries(mergedSocialLinks).filter(([, url]) => Boolean(url))
+  const excludedSocialPlatforms: Record<string, Set<string>> = {
+    angeloothesinger: new Set(['website', 'twitter']),
+    angelothesinger: new Set(['website', 'twitter']),
+    angeliglesias: new Set(['website']),
+  }
+  const sanitizedEntries = Object.entries(mergedSocialLinks).filter(([, url]) => Boolean(url))
+  const socialEntries = sanitizedEntries.filter(([platform]) => {
+    const platformKey = platform.toLowerCase()
+    const blacklisted = excludedSocialPlatforms[normalizedName]
+    return !(blacklisted?.has(platformKey))
+  })
 
   const biographyText = manualArtist?.bio ?? profile.bio ?? 'Bio coming soon.'
   const biographySegments = biographyText
@@ -155,12 +159,6 @@ export default async function ArtistPage({
           className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 hover:bg-neutral-100"
         >
           Back to Team
-        </Link>
-        <Link
-          href="/wof"
-          className="inline-flex items-center rounded-full border border-neutral-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700 hover:bg-neutral-100"
-        >
-          Back to WOF
         </Link>
       </div>
 

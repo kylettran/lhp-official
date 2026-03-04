@@ -48,14 +48,12 @@ This is his.`,
     bio: 'Underground selector _.Rozez._ fused ambient basslines with late-night club energy for the December 21, 2024 takeover.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/rozez.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/rozez.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/_.rozez._',
-      tiktok: 'https://www.tiktok.com/@rozez',
-      soundcloud: 'https://soundcloud.com/rozez',
     },
     showOnWof: true,
   },
@@ -67,14 +65,12 @@ This is his.`,
     bio: 'By Plaza Sam curated a sun-soaked house set for 2K25 Sundown, keeping the energy radiant as daylight faded.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/by plaza sam.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/by plaza sam.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/byplazasam',
-      soundcloud: 'https://soundcloud.com/byplazasam',
-      website: 'https://byplazasam.com',
     },
     showOnWof: true,
   },
@@ -86,14 +82,12 @@ This is his.`,
     bio: 'Angelo blended R&B warmth with soaring falsettos on the 2K25 Sundown stage, elevating every chorus.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/Angelo the singer.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/Angelo the singer.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/angelothesinger',
-      twitter: 'https://twitter.com/angelothesinger',
-      website: 'https://angelothesinger.com',
     },
     showOnWof: true,
   },
@@ -123,13 +117,12 @@ This is his.`,
     bio: 'Wetball909 brought high-energy cadences to 2K25 Rager, layering percussion-heavy hooks that kept the floor bouncing.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/wetball909.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/wetball909.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/wetball909',
-      website: 'https://wetball909.com',
     },
     showOnWof: true,
   },
@@ -141,13 +134,12 @@ This is his.`,
     bio: 'Atom Black injected dark synthwave textures into 2K25 Rager, turning every breakdown into a cinematic moment.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/wetball909.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/wetball909.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/atom.black',
-      tiktok: 'https://www.tiktok.com/@atom.black',
     },
     showOnWof: true,
   },
@@ -159,15 +151,15 @@ This is his.`,
     bio: 'DJ Dloop fused dubstep grit with melodic swells for the 2K25 Rager warm-up slot.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/DJ Dloop.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/DJ Dloop.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/djdloop_',
-      soundcloud: 'https://soundcloud.com/djdloop',
     },
     showOnWof: true,
+    imageFocus: '50% 80%',
   },
   {
     _id: 'manual-justken',
@@ -177,15 +169,35 @@ This is his.`,
     bio: 'Just Ken closed 2K25 Rager with heady future house, balancing hypnotic grooves and vinyl-era flair.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/just ken.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/just ken.png',
     socialLinks: {
-      instagram: 'https://www.instagram.com/justken',
-      mixcloud: 'https://www.mixcloud.com/justken',
+      instagram: 'https://www.instagram.com/kensdayzoff/',
     },
     showOnWof: true,
+    imageFocus: '50% 80%',
+  },
+  {
+    _id: 'manual-frese',
+    name: 'Frese',
+    slug: { current: 'frese' },
+    role: 'Guest Artist / Vocalist',
+    bio: `Frese closes every set with a layered intensity that leaves crowds in awe—his airborne vocals and hard-hitting cadences make any room feel cinematic.
+
+He joined Lovers & Loners as a surprise collaborator, making the night feel like a love letter. His energy is rooted in community, so he keeps showing up for the crew, the DJs, and the people on the floor.`,
+    image: {
+      asset: {
+        url: '/assets/images/frese.png',
+      },
+    },
+    imageUrl: '/assets/images/frese.png',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/tharealfrese/',
+    },
+    showOnWof: true,
+    showOnTeam: false,
   },
   {
     _id: 'manual-angel-iglesias',
@@ -195,26 +207,27 @@ This is his.`,
     bio: 'Angel Iglesias hosted 2K25 Rager, guiding the night with sharp energy and a community-first mindset.',
     image: {
       asset: {
-        url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+        url: '/assets/images/angel iglesias.png',
       },
     },
-    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+    imageUrl: '/assets/images/angel iglesias.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/angel.iglesias00',
       website: 'https://angeliglesias.com',
     },
     showOnWof: true,
+    imageFocus: '50% 85%',
   },
   {
     _id: 'manual-kt',
     name: 'KT',
     slug: { current: 'kt' },
     role: 'Director of Operations',
-    bio: 'KT keeps LHP running behind the scenes, coordinating artists, logistics, and the crew every step of the way.',
+    bio: `i make sure this website is up to date and operations is ran as efficiently as possible for everyone, whether that be internal or external. i've been with this team since TGIF and it has been a wild ride since. aiming to make this organization stronger every day, with one step of improvement at a time.`,
     imageUrl: '/assets/images/kt-portrait.jpg',
     socialLinks: {
       instagram: 'https://www.instagram.com/kt_lhp',
-      linkedin: 'https://www.linkedin.com/in/ktoperations',
+      linkedin: 'https://www.linkedin.com/in/kyletran01/',
     },
     showOnWof: false,
     showOnTeam: true,
@@ -257,11 +270,15 @@ export interface PastEventFallback {
   location: string
   description: string
   instagramUrl?: string
+  instagramRecapUrl?: string
+  instagramViewUrl?: string
+  venueLink?: string
   teamMessage?: string
   posterImage?: { asset: { url: string } } | null
   gallery?: { asset: { url: string } }[]
-  videoHighlights?: { title: string; url: string }[]
+  videoHighlights?: { title: string; url: string; type?: 'video' | 'link' }[]
   attendees?: string[]
+  attendeesCount?: number
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
@@ -274,12 +291,31 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     description:
       'An emotionally charged night where AYE.ARE and FRESE traded verses, vinyl spun vinyl, and the room felt like a single pulse.',
     instagramUrl: 'https://www.instagram.com/lhpofficial',
+    instagramRecapUrl: 'https://www.instagram.com/p/DU9D57CDxb2/',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
+    venueLink: 'https://www.yelp.com/biz/the-continental-room-fullerton',
     teamMessage:
       'Raising the roof with Lovers & Loners was a love letter to the community—thank you for showing up for every verse and every beat.',
-    posterImage: null,
-    gallery: [],
-    videoHighlights: [],
+    posterImage: { asset: { url: '/assets/images/lal9.png' } },
+    gallery: [
+      { asset: { url: '/assets/images/lal1.png' } },
+      { asset: { url: '/assets/images/lal2.png' } },
+      { asset: { url: '/assets/images/lal3.png' } },
+      { asset: { url: '/assets/images/lal4.png' } },
+      { asset: { url: '/assets/images/lal5.png' } },
+      { asset: { url: '/assets/images/lal6.png' } },
+      { asset: { url: '/assets/images/lal7.png' } },
+      { asset: { url: '/assets/images/lal8.png' } },
+    ],
+    videoHighlights: [
+      {
+        title: 'Main landing highlight',
+        url: '/assets/videos/48-seconds.mov',
+        type: 'video',
+      },
+    ],
     attendees: ['Ari Moss', 'Dorian Rae', 'Eli Vance', 'Mina Glass', 'Sasha Lor'],
+    attendeesCount: 126,
   },
   '2k24-rager': {
     slug: '2k24-rager',
