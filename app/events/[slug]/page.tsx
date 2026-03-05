@@ -4,6 +4,7 @@ import groq from 'groq'
 import { Playfair_Display, Space_Grotesk } from 'next/font/google'
 import EventTimelineToggle from '@/components/event-timeline-toggle'
 import EventGallery from '@/components/event-gallery'
+import HeroVideo from '@/components/hero-video'
 import PosterViewer from '@/components/poster-viewer'
 import VideoHighlightCard from '@/components/video-highlight-card'
 import {
@@ -236,13 +237,9 @@ export default async function EventPage({
               {eventData.posterVideo?.asset?.url ? (
                 <div className="mx-auto w-[80%] max-w-[560px]">
                   <div className="relative overflow-hidden rounded-3xl border border-rose-200 bg-black shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] aspect-[4/5]">
-                    <video
+                    <HeroVideo
                       src={eventData.posterVideo.asset.url}
                       className="h-full w-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
                     />
                   </div>
                 </div>
