@@ -21,35 +21,48 @@ export default function EventTimelineToggle({
   const nextEvent = laterEvents[0]
 
   return (
-    <section className="max-w-6xl mx-auto px-6 pb-16">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-        <div className="flex-1">
-          {previousEvent ? (
-            <Link
-              href={`/events/${previousEvent.slug.current}`}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-900 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-900 transition hover:border-neutral-600 hover:text-neutral-900"
-            >
-              ‹ Previous event
-            </Link>
-          ) : (
-            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">
-              This was our first event!
-            </button>
-          )}
-        </div>
-        <div className="flex-1 text-right">
-          {nextEvent ? (
-            <Link
-              href={`/events/${nextEvent.slug.current}`}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-900 bg-neutral-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-neutral-800"
-            >
-              Next event ›
-            </Link>
-          ) : (
-            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-400">
-              No upcoming event yet
-            </button>
-          )}
+    <section
+      aria-label="Event navigation"
+      className="relative z-0 mx-auto mt-8 max-w-6xl px-4 pb-28"
+    >
+      <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 md:bottom-6 lg:bottom-8">
+        <div className="flex w-full max-w-3xl items-center justify-between gap-3 rounded-full border border-neutral-200 bg-white/95 px-3 py-2 shadow-lg transition-all duration-200 backdrop-blur-sm md:px-4 md:py-3">
+          <div className="flex-1">
+            {previousEvent ? (
+              <Link
+                href={`/events/${previousEvent.slug.current}`}
+                className="w-full rounded-full bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-900 transition hover:bg-neutral-100 sm:px-4 sm:py-2 sm:text-xs"
+              >
+                ‹ Previous event
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="w-full rounded-full bg-neutral-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-400 sm:px-4 sm:py-2 sm:text-xs"
+              >
+                This was our first event!
+              </button>
+            )}
+          </div>
+          <div className="flex-1 text-right">
+            {nextEvent ? (
+              <Link
+                href={`/events/${nextEvent.slug.current}`}
+                className="w-full rounded-full bg-neutral-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-neutral-800 sm:px-4 sm:py-2 sm:text-xs"
+              >
+                Next event ›
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="w-full rounded-full bg-neutral-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-400 sm:px-4 sm:py-2 sm:text-xs"
+              >
+                No upcoming event yet
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </section>
