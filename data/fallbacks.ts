@@ -275,6 +275,7 @@ export interface PastEventFallback {
   venueLink?: string
   teamMessage?: string
   posterImage?: { asset: { url: string } } | null
+  posterVideo?: { asset: { url: string } } | null
   gallery?: { asset: { url: string } }[]
   videoHighlights?: { title: string; url: string; type?: 'video' | 'link' }[]
   attendees?: string[]
@@ -291,6 +292,11 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     description:
       'An emotionally charged night where AYE.ARE and FRESE traded verses, vinyl spun vinyl, and the room felt like a single pulse.',
     instagramUrl: 'https://www.instagram.com/lhpofficial',
+    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
+    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     instagramRecapUrl: 'https://www.instagram.com/p/DU9D57CDxb2/',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     venueLink: 'https://www.yelp.com/biz/the-continental-room-fullerton',
@@ -343,25 +349,25 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     title: '2K25 Sundown',
     date: '2025-08-16T21:00:00.000Z',
     status: 'past',
-    location: 'Skyline Warehouse · Los Angeles, CA',
+    location: 'Casa 723',
+    venueLink: 'https://casa723oc.com/',
     description:
       'Sundown turned into a multi-sensory cascade—By Plaza Sam warming up the skyline, Angelo The Singer adding velvet vocals, and Raw Takem freezing every rooftop glow.',
     instagramUrl: 'https://www.instagram.com/lhpofficial',
     teamMessage:
       'Big love to everyone who welcomed the sunlight-to-night transition and danced across the Loft floor.',
-    posterImage: { asset: { url: '/assets/images/lal5.png' } },
-    gallery: [
-      { asset: { url: '/assets/images/lal6.png' } },
-      { asset: { url: '/assets/images/lal7.png' } },
-      { asset: { url: '/assets/images/lal8.png' } },
-    ],
+    posterImage: { asset: { url: '/assets/images/2k25-sundown.avif' } },
+    posterVideo: { asset: { url: '/assets/videos/main-promo-video.mov' } },
+    gallery: [],
     videoHighlights: [
       {
-        title: 'Sundown Recap',
-        url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
+        title: 'Main Promo',
+        url: '/assets/videos/main-promo.mov',
+        type: 'video',
       },
     ],
     attendees: ['Nova Quinn', 'Milo Dane', 'Sasha Lor', 'River Blue', 'Chevy Lane'],
+    attendeesCount: 25,
   },
   '2k25-rager': {
     slug: '2k25-rager',

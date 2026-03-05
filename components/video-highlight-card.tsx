@@ -73,13 +73,6 @@ export default function VideoHighlightCard({ highlight }: { highlight: Highlight
             preload="metadata"
             controls
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-5">
-            <p className="text-xs uppercase tracking-[0.2em] text-rose-200">Video Highlight</p>
-            <p className="text-lg font-semibold text-white">
-              {highlight.title ?? 'Watch the moment'}
-            </p>
-          </div>
           <button
             type="button"
             onClick={openModal}
