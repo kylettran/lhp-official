@@ -370,7 +370,8 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
         type: 'video',
       },
     ],
-    attendees: ['Amelia Hart', 'Kai Vega', 'Zara Kline', 'Theo Mora', 'Brynn Vale'],
+    attendees: [],
+    attendeesCount: 20,
   },
   '2k25-sundown': {
     slug: '2k25-sundown',
