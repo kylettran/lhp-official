@@ -11,6 +11,9 @@ const formatDisplayName = (name?: string, normalizedName?: string) => {
   if (normalizedName === 'ayeare') {
     return 'Aye.Are'
   }
+  if (normalizedName === 'katherinedeleon') {
+    return 'Kat'
+  }
   return name || 'Artist'
 }
 

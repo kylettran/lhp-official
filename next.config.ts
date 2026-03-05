@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   experimental: {
     // Enable experimental features if needed
   },
+  async redirects() {
+    return [
+      {
+        source: '/artists/katherine-de-leon',
+        destination: '/artists/kat',
+        permanent: true,
+      },
+    ]
+  },
   // Ensure proper handling of Vercel Analytics and Speed Insights
   // headers: async () => {
   //   return [

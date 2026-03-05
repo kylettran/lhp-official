@@ -7,6 +7,10 @@ import {
   normalizeName,
 } from '@/data/fallbacks'
 
+const slugAliasMap: Record<string, string> = {
+  kat: 'katherine-de-leon',
+}
+
 const artistBySlugQuery = groq`
   *[_type == "artist" && slug.current == $slug][0]{
     name,
@@ -52,9 +56,10 @@ export default async function ArtistPage({
 }: { params: any; searchParams?: any }) {
   const { slug } = params
   const showBackToWof = searchParams?.from === 'wof'
+  const resolvedSlug = slugAliasMap[slug] ?? slug
 
-  const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug })
-  const manualArtist = manualArtistProfilesBySlug[slug]
+  const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug: resolvedSlug })
+  const manualArtist = manualArtistProfilesBySlug[resolvedSlug]
 
   let profile = sanityArtist
   if (manualArtist) {
@@ -74,7 +79,9 @@ export default async function ArtistPage({
       ? 'AP'
       : normalizedName === 'ayeare'
         ? 'Aye.Are'
-        : profile.name || 'Artist'
+        : normalizedName === 'katherinedeleon'
+          ? 'Kat'
+          : profile.name || 'Artist'
   const isAyeAre = normalizedName === 'ayeare'
   const isKat = normalizedName === 'katherinedeleon'
   const isAp = normalizedName === 'ap'

@@ -61,7 +61,7 @@ This is his.`,
     _id: 'manual-byplazasam',
     name: 'By Plaza Sam',
     slug: { current: 'byplazasam' },
-    role: 'Special Guest DJ',
+    role: 'Guest DJ',
     bio: 'By Plaza Sam curated a sun-soaked house set for 2K25 Sundown, keeping the energy radiant as daylight faded.',
     image: {
       asset: {
@@ -180,6 +180,25 @@ This is his.`,
     imageFocus: '50% 80%',
   },
   {
+    _id: 'manual-kylo',
+    name: 'KYLO',
+    slug: { current: 'kylo' },
+    role: 'Resident DJ',
+    bio: 'KYLO dropped future-focused rhythms and experimental bass textures that kept the 2K25 Rager floor wide open.',
+    image: {
+      asset: {
+        url: '/assets/images/KYLO.jpg',
+      },
+    },
+    imageUrl: '/assets/images/KYLO.jpg',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/kylo',
+    },
+    showOnWof: true,
+    showOnTeam: false,
+    imageFocus: '50% 40%',
+  },
+  {
     _id: 'manual-frese',
     name: 'Frese',
     slug: { current: 'frese' },
@@ -224,7 +243,7 @@ He joined Lovers & Loners as a surprise collaborator, making the night feel like
     slug: { current: 'kt' },
     role: 'Director of Operations',
     bio: `i make sure this website is up to date and operations is ran as efficiently as possible for everyone, whether that be internal or external. i've been with this team since TGIF and it has been a wild ride since. aiming to make this organization stronger every day, with one step of improvement at a time.`,
-    imageUrl: '/assets/images/kt-portrait.jpg',
+    imageUrl: '/assets/images/KT.JPG',
     socialLinks: {
       instagram: 'https://www.instagram.com/kt_lhp',
       linkedin: 'https://www.linkedin.com/in/kyletran01/',
@@ -378,11 +397,11 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
     description: '',
     lineupByRole: {
-      hosts: [{ name: 'Katherine De Leon', slug: 'katherine-de-leon' }],
+    hosts: [{ name: 'Kat', slug: 'kat' }],
       artists: [
         { name: 'Atom Black', slug: 'atom-black' },
         { name: 'Wetball909', slug: 'wetball909' },
-        { name: 'Aye.Are', slug: 'ayeare' },
+        { name: 'Aye.Are', slug: 'aye-are' },
       ],
       djs: [
         { name: 'DJ Dloop', slug: 'djdloop' },
