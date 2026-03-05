@@ -34,6 +34,19 @@ export default function VideoHighlightCard({ highlight }: { highlight: Highlight
   }, [isModalOpen, closeModal])
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = previousOverflow
+      }
+    }
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isModalOpen])
+
+  useEffect(() => {
     const videoElement = videoRef.current
     if (!videoElement || !shouldRenderVideo(highlight)) {
       return

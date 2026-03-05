@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
+import Link from 'next/link'
 import { Playfair_Display, Space_Grotesk } from 'next/font/google'
 import EventTimelineToggle from '@/components/event-timeline-toggle'
 import EventGallery from '@/components/event-gallery'
@@ -10,6 +11,7 @@ import VideoHighlightCard from '@/components/video-highlight-card'
 import {
   pastEventFallbackList,
   pastEventFallbacks,
+  LineupRole,
 } from '@/data/fallbacks'
 
 const playfair = Playfair_Display({
@@ -211,34 +213,43 @@ export default async function EventPage({
               </div>
               {showLineupSections ? (
                 <div className="mt-6 grid gap-6 md:grid-cols-3">
-                  {(['hosts', 'artists', 'djs'] as Array<
-                    keyof typeof lineupByRole
-                  >).map((role) => {
-                    const label =
-                      role === 'hosts'
-                        ? 'Hosts'
-                        : role === 'artists'
-                        ? 'Artists'
-                        : 'DJs'
-                    const names = Array.isArray(lineupByRole[role])
-                      ? lineupByRole[role]
-                      : []
-                    if (!names.length) {
-                      return null
+                  {(['hosts', 'artists', 'djs'] as Array<LineupRole>).map(
+                    (role) => {
+                      const label =
+                        role === 'hosts'
+                          ? 'Hosts'
+                          : role === 'artists'
+                          ? 'Artists'
+                          : 'DJs'
+                      const entries = Array.isArray(lineupByRole?.[role])
+                        ? lineupByRole?.[role]
+                        : []
+                      if (!entries?.length) {
+                        return null
+                      }
+                      return (
+                        <div key={role} className="space-y-1">
+                          <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                            {label}
+                          </p>
+                          <ul className="text-base font-semibold text-white">
+                            {entries.map((entry) => (
+                              <li key={entry.slug}>
+                                <Link
+                                  href={`/artists/${entry.slug}`}
+                                  className="text-white hover:text-rose-200"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  {entry.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
                     }
-                    return (
-                      <div key={String(role)} className="space-y-1">
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                          {label}
-                        </p>
-                        <ul className="text-base font-semibold text-white">
-                          {names.map((name) => (
-                            <li key={name}>{name}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
-                  })}
+                  )}
                 </div>
               ) : (
                 <p className="max-w-xl text-base text-white/70">

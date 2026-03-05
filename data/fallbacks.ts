@@ -282,7 +282,7 @@ export interface PastEventFallback {
   videoHighlights?: { title: string; url: string; type?: 'video' | 'link' }[]
   attendees?: string[]
   attendeesCount?: number
-  lineupByRole?: Record<LineupRole, string[]>
+  lineupByRole?: Partial<Record<LineupRole, { name: string; slug: string }[]>>
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
@@ -378,9 +378,16 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
     description: '',
     lineupByRole: {
-      hosts: ['wetball909', 'Raw Takem'],
-      artists: ['Atom Black', 'KYLO'],
-      djs: ['DJ Dloop'],
+      hosts: [{ name: 'Katherine De Leon', slug: 'katherine-de-leon' }],
+      artists: [
+        { name: 'Atom Black', slug: 'atom-black' },
+        { name: 'Wetball909', slug: 'wetball909' },
+        { name: 'Aye.Are', slug: 'ayeare' },
+      ],
+      djs: [
+        { name: 'DJ Dloop', slug: 'djdloop' },
+        { name: 'KYLO', slug: 'kylo' },
+      ],
     },
     instagramUrl: 'https://www.instagram.com/angel.iglesias00',
     instagramRecapUrl: 'https://www.instagram.com/p/DTHOI-VERur/?img_index=1',

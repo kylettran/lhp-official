@@ -25,7 +25,7 @@ export default function EventTimelineToggle({
       aria-label="Event navigation"
       className="relative z-0 mx-auto mt-8 max-w-6xl px-4 pb-28"
     >
-      <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 md:bottom-6 lg:bottom-8">
+      <div className="fixed inset-x-0 bottom-4 z-[120] flex justify-center px-4 md:bottom-6 lg:bottom-8">
         <div className="flex w-full max-w-3xl items-center justify-between gap-3 rounded-full border border-neutral-200 bg-white/95 px-4 py-3 shadow-lg transition-all duration-200 backdrop-blur-sm md:px-5 md:py-3">
           <div className="flex-1">
             {previousEvent ? (
