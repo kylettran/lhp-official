@@ -292,12 +292,6 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     description:
       'An emotionally charged night where AYE.ARE and FRESE traded verses, vinyl spun vinyl, and the room felt like a single pulse.',
     instagramUrl: 'https://www.instagram.com/lhpofficial',
-    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
-    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
-    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
-    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
-    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
-    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     instagramRecapUrl: 'https://www.instagram.com/p/DU9D57CDxb2/',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     venueLink: 'https://www.yelp.com/biz/the-continental-room-fullerton',
