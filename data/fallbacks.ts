@@ -294,6 +294,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     instagramUrl: 'https://www.instagram.com/lhpofficial',
     instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
+    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
@@ -354,6 +355,8 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     description:
       'Sundown turned into a multi-sensory cascade—By Plaza Sam warming up the skyline, Angelo The Singer adding velvet vocals, and Raw Takem freezing every rooftop glow.',
     instagramUrl: 'https://www.instagram.com/lhpofficial',
+    instagramRecapUrl: 'https://www.instagram.com/p/DNo6dmQp-He/',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     teamMessage:
       'Big love to everyone who welcomed the sunlight-to-night transition and danced across the Loft floor.',
     posterImage: { asset: { url: '/assets/images/2k25-sundown.avif' } },
