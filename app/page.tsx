@@ -3,7 +3,7 @@ import groq from 'groq'
 import Link from 'next/link'
 
 const upcomingEventQuery = groq`
-  *[_type == "event" && status == "upcoming"]
+  *[_type == "event" && status == "upcoming" && slug.current != "lion-heart-kickoff-night"]
   | order(date asc)[0]{
     title,
     slug,

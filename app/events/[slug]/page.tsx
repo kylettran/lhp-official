@@ -65,7 +65,7 @@ export default async function EventPage({
 }) {
   const { slug } = await params
 
-  if (slug === 'lion-heart-past-event') {
+  if (slug === 'lion-heart-past-event' || slug === 'lion-heart-kickoff-night') {
     notFound()
   }
 
@@ -84,7 +84,7 @@ export default async function EventPage({
     return <div>Event not found</div>
   }
 
-  const excludedSlugs = new Set(['lion-heart-past-event'])
+  const excludedSlugs = new Set(['lion-heart-past-event', 'lion-heart-kickoff-night'])
   const timelineEvents = Array.isArray(allEvents)
     ? allEvents.filter((item: any) => !excludedSlugs.has(item.slug?.current))
     : []
@@ -235,7 +235,7 @@ export default async function EventPage({
             </div>
             <div className="relative">
               {eventData.posterVideo?.asset?.url ? (
-                <div className="mx-auto w-[80%] max-w-[560px]">
+                <div className="mx-auto w-full max-w-[560px]">
                   <div className="relative overflow-hidden rounded-3xl border border-rose-200 bg-black shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] aspect-[4/5]">
                     <HeroVideo
                       src={eventData.posterVideo.asset.url}

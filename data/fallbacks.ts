@@ -369,15 +369,18 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
   '2k25-rager': {
     slug: '2k25-rager',
     title: '2K25 Rager',
-    date: '2025-11-08T22:00:00.000Z',
+    date: '2025-12-18T21:00:00.000Z',
     status: 'past',
-    location: 'The Hive · Downtown Los Angeles, CA',
+    location: 'The Continental Room · Fullerton, CA',
+    venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
     description:
       '2K25 Rager was a charged battleground of guest artists, DJs, and the host energy—wetball909, Atom Black, Just Ken, DJ Dloop, Raw Takem framed every burst.',
     instagramUrl: 'https://www.instagram.com/angel.iglesias00',
+    instagramRecapUrl: 'https://www.instagram.com/p/DTHOI-VERur/?img_index=1',
+    instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     teamMessage:
       'Thanks for showing up hard, for being the heat of the floor, and for trusting Angel Iglesias to keep the pulse racing.',
-    posterImage: { asset: { url: '/assets/images/lal9.png' } },
+    posterImage: { asset: { url: '/assets/images/2k25 rager.jpg' } },
     gallery: [],
     videoHighlights: [
       {
@@ -386,6 +389,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
       },
     ],
     attendees: ['Nico Sora', 'Lia Storm', 'Cruz Maddox', 'Elena Rue', 'Oak Rivers'],
+    attendeesCount: 25,
   },
 }
 
