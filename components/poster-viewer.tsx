@@ -36,17 +36,19 @@ export default function PosterViewer({ imageUrl, title }: PosterViewerProps) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={open}
-        className="group relative cursor-grab active:cursor-grabbing overflow-hidden rounded-3xl border border-rose-200 bg-white shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] transition hover:border-rose-300 hover:scale-105"
-      >
-        <img
-          src={imageUrl}
-          alt={`${title} poster`}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-      </button>
+      <div className="mx-auto w-[80%] max-w-[560px]">
+        <button
+          type="button"
+          onClick={open}
+          className="group relative cursor-grab active:cursor-grabbing overflow-hidden rounded-3xl border border-rose-200 bg-white shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] transition hover:border-rose-300 hover:scale-105 w-full"
+        >
+          <img
+            src={imageUrl}
+            alt={`${title} poster`}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+        </button>
+      </div>
 
       {isOpen && (
         <div

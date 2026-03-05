@@ -35,6 +35,9 @@ const eventBySlugQuery = groq`
     posterImage{
       asset->{url}
     },
+    posterVideo{
+      asset->{url}
+    },
     gallery[]{
       asset->{url}
     },
@@ -195,12 +198,12 @@ export default async function EventPage({
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {venueLink ? (
-                  <a
-                    href={venueLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block rounded-2xl border border-rose-200 bg-white/90 p-4 transition hover:border-rose-300"
-                  >
+                <a
+                  href={venueLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block cursor-grab active:cursor-grabbing rounded-2xl border border-rose-200 bg-white/90 p-4 transition hover:border-rose-300"
+                >
                     <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
                       Venue
                     </p>
@@ -230,7 +233,20 @@ export default async function EventPage({
               </div>
             </div>
             <div className="relative">
-              {eventData.posterImage?.asset?.url ? (
+              {eventData.posterVideo?.asset?.url ? (
+                <div className="mx-auto w-[80%] max-w-[560px]">
+                  <div className="relative overflow-hidden rounded-3xl border border-rose-200 bg-black shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] aspect-[4/5]">
+                    <video
+                      src={eventData.posterVideo.asset.url}
+                      className="h-full w-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                  </div>
+                </div>
+              ) : eventData.posterImage?.asset?.url ? (
                 <PosterViewer
                   imageUrl={eventData.posterImage.asset.url}
                   title={eventData.title}
