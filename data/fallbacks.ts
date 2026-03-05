@@ -262,6 +262,8 @@ export const manualArtistProfilesBySlug = manualProfiles.reduce<Record<string, M
   {}
 )
 
+export type LineupRole = 'hosts' | 'artists' | 'djs'
+
 export interface PastEventFallback {
   slug: string
   title: string
@@ -280,6 +282,7 @@ export interface PastEventFallback {
   videoHighlights?: { title: string; url: string; type?: 'video' | 'link' }[]
   attendees?: string[]
   attendeesCount?: number
+  lineupByRole?: Record<LineupRole, string[]>
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
