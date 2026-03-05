@@ -346,7 +346,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     title: '2K24 Rager',
     date: '2024-12-21T23:30:00.000Z',
     status: 'past',
-    location: 'Backyard · Hawthorne, CA',
+    location: 'Backyard · South Gate, CA',
     description: '',
     lineupByRole: {
       hosts: [{ name: 'Kat', slug: 'kat' }],
@@ -359,6 +359,8 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     instagramUrl: 'https://www.instagram.com/_.rozez._',
     teamMessage:
       'Appreciate the crew who let _.Rozez._ morph the night into the 2K24 Rager—every body ignited the countdown into the new year.',
+    venueLink:
+      'https://www.google.com/maps?sca_esv=286534660d0b6d5d&output=search&q=south+gate+ca&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpUrv6YeyJhXfuYqj4Fj6c1UM_gfiPu45LsYicKAFFSwK9VGM9ifyi0SMcEMyHEbgr-_Dbo05BRjk2DPiLjALBCjmLP-QI0Wn_XUz3pT6Cqh69dO8V3WXIt279IR7ljsVnREIndCnPXx1s3G0FPL75V0ZKFR8aug9neeG9PRf-CrRo6E5eppQoW8NbjKI-bE0qdsvmVw&entry=mc&ved=1t:200715&ictx=111',
     posterVideo: { asset: { url: '/assets/videos/2k24-rager.mov' } },
     gallery: [
       { asset: { url: '/assets/images/2k24 rager1.png' } },
