@@ -296,7 +296,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     venueLink: 'https://www.yelp.com/biz/the-continental-room-fullerton',
     teamMessage:
       'Raising the roof with Lovers & Loners was a love letter to the community—thank you for showing up for every verse and every beat.',
-    posterImage: { asset: { url: '/assets/images/lal9.png' } },
+    posterImage: { asset: { url: '/assets/images/lovers-and-loners.avif' } },
     gallery: [
       { asset: { url: '/assets/images/lal1.png' } },
       { asset: { url: '/assets/images/lal2.png' } },
@@ -306,6 +306,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
       { asset: { url: '/assets/images/lal6.png' } },
       { asset: { url: '/assets/images/lal7.png' } },
       { asset: { url: '/assets/images/lal8.png' } },
+      { asset: { url: '/assets/images/lal9.png' } },
     ],
     videoHighlights: [
       {
