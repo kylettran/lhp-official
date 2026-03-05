@@ -149,25 +149,49 @@ export default async function EventPage({
       : '—'
 
   return (
-    <main className={`${spaceGrotesk.className} bg-[#fffdfd]`}>
-      <div className="relative overflow-hidden bg-[linear-gradient(180deg,#fdeef1_0%,#fff8f2_100%)]">
+    <main
+      className={`${spaceGrotesk.className} relative bg-black text-white`}
+      style={{
+        backgroundImage: "url('/assets/images/liquid chrome background.avif')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 55%),' +
+            'radial-gradient(circle at 80% 10%, rgba(255,255,255,0.04), transparent 60%),' +
+            'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.6) 70%),' +
+            'linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.6) 50%, rgba(255,255,255,0.01) 100%)',
+          backgroundSize: '250% 250%, 250% 250%, 100% 200%, 100% 100%',
+          filter: 'blur(1px)',
+          opacity: 0.5,
+        }}
+      />
+      <div className="relative z-10 overflow-hidden bg-black/80 backdrop-blur-sm">
         <div className="relative max-w-6xl mx-auto px-6 py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
               {eventData.status === 'past' && (
-                <span className="inline-flex items-center gap-2 rounded-full border border-rose-300 bg-white/90 px-4 py-1 text-xs uppercase tracking-[0.3em] text-rose-600">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/80">
                   Past Event
                 </span>
               )}
               <div>
-                <h1 className={`${playfair.className} text-4xl font-semibold tracking-tight text-neutral-900 sm:text-5xl`}>
+                <h1
+                  className={`${playfair.className} text-4xl font-semibold tracking-tight text-white sm:text-5xl`}
+                >
                   {eventData.title}
                 </h1>
-                <p className="mt-3 text-sm text-neutral-500">
+                <p className="mt-3 text-sm text-white/70">
                   {eventDate.toLocaleDateString()} · {eventData.location}
                 </p>
               </div>
-              <p className="max-w-xl text-base text-neutral-700">
+              <p className="max-w-xl text-base text-white/70">
                 {eventData.description}
               </p>
               <div className="flex flex-wrap gap-3">
@@ -184,7 +208,7 @@ export default async function EventPage({
                 {eventData.ticketUrl && (
                   <a
                     href={eventData.ticketUrl}
-                    className="inline-flex items-center justify-center rounded-full border border-neutral-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
+                    className="inline-flex items-center justify-center rounded-full border border-white/60 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-white hover:text-black"
                     rel="noreferrer"
                     target="_blank"
                   >
@@ -203,26 +227,28 @@ export default async function EventPage({
                   href={venueLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="block cursor-grab active:cursor-grabbing rounded-2xl border border-rose-200 bg-white/90 p-4 transition hover:border-rose-300"
+                  className="block cursor-grab active:cursor-grabbing rounded-2xl border border-white/40 bg-white/10 p-4 transition hover:border-white/60"
                 >
-                    <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/70">
                       Venue
                     </p>
-                    <p className="mt-2 text-sm text-neutral-700">{eventData.location}</p>
+                    <p className="mt-2 text-sm text-white">
+                      {eventData.location}
+                    </p>
                   </a>
                 ) : (
-                  <div className="rounded-2xl border border-rose-200 bg-white/90 p-4">
-                    <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
+                  <div className="rounded-2xl border border-white/40 bg-white/10 p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-white/70">
                       Venue
                     </p>
-                    <p className="mt-2 text-sm text-neutral-700">{eventData.location}</p>
+                    <p className="mt-2 text-sm text-white">{eventData.location}</p>
                   </div>
                 )}
-                <div className="rounded-2xl border border-rose-200 bg-white/90 p-4">
-                  <p className="text-xs uppercase tracking-[0.3em] text-rose-500">
+                <div className="rounded-2xl border border-white/40 bg-white/10 p-4">
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/70">
                     Date
                   </p>
-                  <p className="mt-2 text-sm text-neutral-700">
+                  <p className="mt-2 text-sm text-white">
                     {eventDate.toLocaleDateString(undefined, {
                       weekday: 'long',
                       month: 'long',
@@ -253,27 +279,35 @@ export default async function EventPage({
                   Add the event poster image in Sanity to spotlight the vibe.
                 </div>
               )}
-              {viewLink && (
-                <a
-                  href={viewLink}
-                  className="absolute -bottom-6 left-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  View on Instagram
-                </a>
-              )}
-            </div>
+            {viewLink && (
+              <a
+                href={viewLink}
+                className="absolute -bottom-6 left-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg"
+                rel="noreferrer"
+                target="_blank"
+              >
+                View on Instagram
+              </a>
+            )}
           </div>
         </div>
       </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-black/60 to-black"
+      />
+    </div>
 
-      <section className="max-w-6xl mx-auto px-6 py-14">
-        <div className="flex items-end justify-between">
-          <h2 className={`${playfair.className} text-3xl font-semibold text-neutral-900`}>
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-14">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-transparent"
+        />
+        <div className="relative z-10 flex items-end justify-between">
+          <h2 className={`${playfair.className} text-3xl font-semibold text-white`}>
             Photo Gallery
           </h2>
-          <p className="text-sm text-neutral-500">Highlights from the night</p>
+          <p className="text-sm text-white/70">Highlights from the night</p>
         </div>
         <div className="mt-8">
           {hasGallery ? (
@@ -281,10 +315,10 @@ export default async function EventPage({
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 3 }).map((_, index) => (
-                <div
-                  key={`placeholder-${index}`}
-                  className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-rose-200 bg-[#fff5f7] text-sm text-neutral-400"
-                >
+                  <div
+                    key={`placeholder-${index}`}
+                    className="flex h-64 items-center justify-center rounded-2xl border border-white/30 bg-neutral-900/50 text-sm text-white/50"
+                  >
                   Upload photo highlight
                 </div>
               ))}
@@ -293,77 +327,85 @@ export default async function EventPage({
         </div>
       </section>
 
-      <section className="bg-neutral-950 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
-            <div>
-              <h2 className={`${playfair.className} text-3xl font-semibold`}>
-                Video Highlights
-              </h2>
-              <p className="mt-3 text-sm text-white/70">
-                Short clips and recaps from the energy on the floor.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              {hasVideos ? (
-                eventData.videoHighlights.map((video: any, index: number) => (
-                  <VideoHighlightCard
-                    key={`${video?.url ?? 'video'}-${index}`}
-                    highlight={video}
-                  />
-                ))
-              ) : (
-                Array.from({ length: 2 }).map((_, index) => (
-                  <div
-                    key={`video-placeholder-${index}`}
-                    className="rounded-2xl border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/60"
-                  >
-                    Add video highlight link in Sanity.
-                  </div>
-                ))
-              )}
+      <section className="relative overflow-hidden text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/70 to-transparent"
+        />
+        <div className="relative z-10 flex justify-center px-4">
+          <div className="w-full max-w-6xl rounded-[36px] border border-white/5 bg-neutral-950/90 px-6 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.4)]">
+            <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+              <div>
+                <h2 className={`${playfair.className} text-3xl font-semibold`}>
+                  Video Highlights
+                </h2>
+                <p className="mt-3 text-sm text-white/70">
+                  Short clips and recaps from the energy on the floor.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {hasVideos ? (
+                  eventData.videoHighlights.map((video: any, index: number) => (
+                    <VideoHighlightCard
+                      key={`${video?.url ?? 'video'}-${index}`}
+                      highlight={video}
+                    />
+                  ))
+                ) : (
+                  Array.from({ length: 2 }).map((_, index) => (
+                    <div
+                      key={`video-placeholder-${index}`}
+                      className="rounded-2xl border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/60"
+                    >
+                      Add video highlight link in Sanity.
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-3xl border border-rose-200 bg-[#fff5f7] p-8">
-            <h2 className={`${playfair.className} text-3xl font-semibold text-neutral-900`}>
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-transparent"
+        />
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-3xl border border-black/40 bg-neutral-900/60 p-8">
+            <h2
+              className={`${playfair.className} text-3xl font-semibold text-white`}
+            >
               Message From Our Team
             </h2>
-            <p className="mt-4 text-neutral-700">
+            <p className="mt-4 text-white/70">
               {eventData.teamMessage ||
                 'Drop a thank-you note or recap here. Highlight the artists, the energy, and what the night meant for the community.'}
             </p>
           </div>
-          <div className="rounded-3xl border border-rose-100 bg-white p-8">
-            <h3 className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+          <div className="rounded-3xl border border-black/40 bg-neutral-900/70 p-8">
+            <h3 className="text-sm uppercase tracking-[0.2em] text-white/70">
               Attendees
             </h3>
-            <p className="mt-2 text-3xl font-semibold text-neutral-900">
+            <p className="mt-2 text-3xl font-semibold text-white">
               {attendeeCount}
             </p>
-            <p className="mt-2 text-sm text-neutral-500">
+            <p className="mt-2 text-sm text-white/70">
               Community members who showed love.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {hasAttendees ? (
-                eventData.attendees.map((name: string, index: number) => (
+            {hasAttendees && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {eventData.attendees.map((name: string, index: number) => (
                   <span
                     key={`${name}-${index}`}
-                    className="rounded-full border border-neutral-200 px-3 py-1 text-xs uppercase tracking-wide text-neutral-600"
-                  >
+                    className="rounded-full border border-white/30 px-3 py-1 text-xs uppercase tracking-wide text-white/70"
+                    >
                     {name}
                   </span>
-                ))
-              ) : (
-                <span className="text-sm text-neutral-400">
-                  Add attendee names for social proof.
-                </span>
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

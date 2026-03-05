@@ -380,15 +380,26 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     teamMessage:
       'Thanks for showing up hard, for being the heat of the floor, and for trusting Angel Iglesias to keep the pulse racing.',
-    posterImage: { asset: { url: '/assets/images/2k25 rager.jpg' } },
-    gallery: [],
+    posterImage: { asset: { url: '/assets/images/2k25ragermain.png' } },
+    gallery: [
+      { asset: { url: '/assets/images/2k25rager1.png' } },
+      { asset: { url: '/assets/images/2k25rager2.png' } },
+      { asset: { url: '/assets/images/2k25rager3.png' } },
+      { asset: { url: '/assets/images/2k25rager4.png' } },
+      { asset: { url: '/assets/images/2k25rager5.png' } },
+      { asset: { url: '/assets/images/2k25rager6.png' } },
+      { asset: { url: '/assets/images/2k25rager7.png' } },
+      { asset: { url: '/assets/images/2k25rager8.png' } },
+      { asset: { url: '/assets/images/2k25rager9.png' } },
+      { asset: { url: '/assets/images/2k25rager10.png' } },
+    ],
     videoHighlights: [
       {
         title: 'Rager Aftermovie',
         url: 'https://vimeo.com/76979871',
       },
     ],
-    attendees: ['Nico Sora', 'Lia Storm', 'Cruz Maddox', 'Elena Rue', 'Oak Rivers'],
+    attendees: [],
     attendeesCount: 25,
   },
 }

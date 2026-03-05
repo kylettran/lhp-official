@@ -84,27 +84,46 @@ export default function EventGallery({
           const url = image?.asset?.url
           if (!url) {
             return (
-              <div
-                key={`gallery-placeholder-${index}`}
-                className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-rose-200 bg-[#fff5f7] text-sm text-neutral-400"
-              >
-                Add photo
-              </div>
-            )
+          <div
+            key={`gallery-placeholder-${index}`}
+            className="flex h-64 items-center justify-center rounded-2xl border border-white/30 bg-neutral-900/50 text-sm text-white/50"
+          >
+            Add photo
+          </div>
+        )
           }
 
+          const highlightIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+          const objectPositionValue = highlightIndexes.includes(index)
+            ? 'center top'
+            : 'center'
+          const objectPosition =
+            index === 6 ? 'center 40%' : index === 7 ? 'center 30%' : objectPositionValue
+          const transformOverride =
+            index === 6
+              ? 'translateY(15%) scale(1.15)'
+              : index === 7
+              ? 'translateY(5%) scale(1.1)'
+              : 'scale(1.05)'
           return (
             <button
               key={`gallery-image-${index}`}
               type="button"
-              className="group relative cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl border border-rose-100 bg-white transition hover:border-rose-200"
+            className="group relative cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl border border-white/20 bg-neutral-900/60 transition hover:border-white/40 hover:shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
               onClick={() => open(index)}
             >
-              <img
-                src={url}
-                alt={`Gallery image ${index + 1}`}
-                className="h-64 w-full cursor-grab active:cursor-grabbing object-cover transition duration-500 group-hover:scale-105"
-              />
+              <div className="h-64 w-full overflow-hidden">
+                <img
+                  src={url}
+                  alt={`Gallery image ${index + 1}`}
+                  className="h-64 w-full cursor-grab active:cursor-grabbing object-cover transition duration-500 group-hover:scale-105"
+                  style={{
+                    objectPosition,
+                    transform: transformOverride,
+                    minHeight: '110%',
+                  }}
+                />
+              </div>
               <span className="sr-only">Open gallery image</span>
             </button>
           )

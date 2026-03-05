@@ -25,8 +25,14 @@ export default async function HomePage() {
   ]
 
   return (
-    <main className="max-w-5xl mx-auto py-16 px-4 space-y-20">
-      <section className="home-video">
+    <main
+      className="min-h-screen bg-black bg-cover bg-center py-16 px-4"
+      style={{
+        backgroundImage: "url('/assets/images/liquid chrome background.avif')",
+      }}
+    >
+      <div className="mx-auto max-w-5xl space-y-20">
+        <section className="home-video">
         <video
           className="home-video__player"
           src="/assets/videos/48-seconds.mov"
@@ -38,26 +44,26 @@ export default async function HomePage() {
           controls
           preload="metadata"
         />
-      </section>
+        </section>
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
-              Recaps & Memories
+        <section className="relative space-y-6 rounded-3xl border border-white/20 bg-black/70 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                Recaps & Memories
+              </p>
+              <h2 className="text-3xl font-semibold text-white">
+                Highlights Carousel
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm text-white/70">
+              A rolling glimpse of past nights, packed with images and video
+              moments to keep the energy alive.
             </p>
-            <h2 className="text-3xl font-semibold text-neutral-900">
-              Highlights Carousel
-            </h2>
           </div>
-          <p className="max-w-xl text-sm text-neutral-500">
-            A rolling glimpse of past nights, packed with images and video
-            moments to keep the energy alive.
-          </p>
-        </div>
 
-        <div className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-white py-8">
-          <div className="carousel-track-slow flex gap-5 px-6">
+          <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-black/80 py-8">
+            <div className="carousel-track-slow flex gap-5 px-6">
             {[...highlightItems, ...highlightItems].map((item, index) => (
               <div
                 key={`${item.label}-${index}`}
@@ -73,21 +79,20 @@ export default async function HomePage() {
                 <p className="mt-2 text-sm font-semibold">{item.label}</p>
               </div>
             ))}
+            </div>
           </div>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/30 to-white" />
-        </div>
-      </section>
+        </section>
 
-      <section className="rounded-3xl border border-neutral-200 bg-white p-8">
+        <section className="rounded-3xl border border-white/20 bg-black/80 p-8 text-white">
         {upcomingEvent ? (
           <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">
               Upcoming Event
             </p>
-            <h2 className="text-4xl font-bold text-neutral-900">
+            <h2 className="text-4xl font-bold text-white">
               {upcomingEvent.title}
             </h2>
-            <p className="text-base text-neutral-600">
+            <p className="text-base text-white/70">
               {new Date(upcomingEvent.date).toLocaleDateString()} ·{' '}
               {upcomingEvent.location}
             </p>
@@ -108,6 +113,7 @@ export default async function HomePage() {
           </div>
         )}
       </section>
+      </div>
     </main>
   )
 }
