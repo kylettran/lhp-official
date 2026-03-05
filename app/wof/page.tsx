@@ -96,7 +96,13 @@ export default async function WofPage() {
   }
 
   const renderCardFooter = (artist: typeof normalized[number]) => {
-    const label = artist.isHost ? 'Host' : artist.isDj ? 'DJ' : 'Artist'
+    const label = artist.role
+      ? artist.role
+      : artist.isHost
+        ? 'Host'
+        : artist.isDj
+          ? 'DJ'
+          : 'Artist'
     return (
       <div className="mt-3 flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">

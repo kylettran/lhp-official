@@ -93,18 +93,26 @@ export default function EventGallery({
         )
           }
 
-          const highlightIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+          const highlightIndexes = [1, 2, 3, 4, 5, 6, 7, 8, 9]
           const objectPositionValue = highlightIndexes.includes(index)
             ? 'center top'
             : 'center'
           const objectPosition =
-            index === 6 ? 'center 40%' : index === 7 ? 'center 30%' : objectPositionValue
+            index === 0
+              ? 'center 30%'
+              : index === 6
+                ? 'center 40%'
+                : index === 7
+                  ? 'center 30%'
+                  : objectPositionValue
           const transformOverride =
-            index === 6
-              ? 'translateY(15%) scale(1.15)'
-              : index === 7
+            index === 0
               ? 'translateY(5%) scale(1.1)'
-              : 'scale(1.05)'
+              : index === 6
+                ? 'translateY(15%) scale(1.15)'
+                : index === 7
+                  ? 'translateY(5%) scale(1.1)'
+                  : 'scale(1.05)'
           return (
             <button
               key={`gallery-image-${index}`}

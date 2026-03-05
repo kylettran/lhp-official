@@ -346,19 +346,30 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     title: '2K24 Rager',
     date: '2024-12-21T23:30:00.000Z',
     status: 'past',
-    location: 'District 1890 · Los Angeles, CA',
-    description:
-      '_.Rozez._ transformed the winter floor into the 2K24 Rager, rolling bass-heavy crescendos and cinematic synth waves into every beat.',
+    location: 'Backyard · Hawthorne, CA',
+    description: '',
+    lineupByRole: {
+      hosts: [{ name: 'Kat', slug: 'kat' }],
+      artists: [
+        { name: '_.Rozez._', slug: 'rozez' },
+        { name: 'Aye.Are', slug: 'aye-are' },
+      ],
+      djs: [{ name: 'KYLO', slug: 'kylo' }],
+    },
     instagramUrl: 'https://www.instagram.com/_.rozez._',
     teamMessage:
       'Appreciate the crew who let _.Rozez._ morph the night into the 2K24 Rager—every body ignited the countdown into the new year.',
-    posterImage: { asset: { url: '/assets/images/lal1.png' } },
+    posterVideo: { asset: { url: '/assets/videos/2k24-rager.mov' } },
     gallery: [
-      { asset: { url: '/assets/images/lal2.png' } },
-      { asset: { url: '/assets/images/lal3.png' } },
-      { asset: { url: '/assets/images/lal4.png' } },
+      { asset: { url: '/assets/images/2k24 rager1.png' } },
     ],
-    videoHighlights: [],
+    videoHighlights: [
+      {
+        title: '2K24 Rager Highlight',
+        url: '/assets/videos/2k24-rager2.mov',
+        type: 'video',
+      },
+    ],
     attendees: ['Amelia Hart', 'Kai Vega', 'Zara Kline', 'Theo Mora', 'Brynn Vale'],
   },
   '2k25-sundown': {

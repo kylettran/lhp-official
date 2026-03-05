@@ -162,7 +162,6 @@ export default async function EventPage({
   const attendeeCount = slug === '2k25-rager' ? 60 : baseAttendeeCount
   const lineupByRole = eventData.lineupByRole
   const showLineupSections =
-    slug === '2k25-rager' &&
     lineupByRole &&
     Object.keys(lineupByRole).some(
       (key) => Array.isArray(lineupByRole[key]) && lineupByRole[key].length > 0
