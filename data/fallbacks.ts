@@ -363,7 +363,7 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
         type: 'video',
       },
     ],
-    attendees: ['Nova Quinn', 'Milo Dane', 'Sasha Lor', 'River Blue', 'Chevy Lane'],
+    attendees: [],
     attendeesCount: 25,
   },
   '2k25-rager': {
@@ -373,15 +373,21 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     status: 'past',
     location: 'The Continental Room · Fullerton, CA',
     venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
-    description:
-      '2K25 Rager was a charged battleground of guest artists, DJs, and the host energy—wetball909, Atom Black, Just Ken, DJ Dloop, Raw Takem framed every burst.',
+    description: '',
+    lineupByRole: {
+      hosts: ['wetball909', 'Raw Takem'],
+      artists: ['Atom Black', 'KYLO'],
+      djs: ['DJ Dloop'],
+    },
     instagramUrl: 'https://www.instagram.com/angel.iglesias00',
     instagramRecapUrl: 'https://www.instagram.com/p/DTHOI-VERur/?img_index=1',
     instagramViewUrl: 'https://www.instagram.com/lion.heart.productions/',
     teamMessage:
       'Thanks for showing up hard, for being the heat of the floor, and for trusting Angel Iglesias to keep the pulse racing.',
     posterImage: { asset: { url: '/assets/images/2k25ragermain.png' } },
+    posterVideo: { asset: { url: '/assets/videos/RAGER_FINAL.mov' } },
     gallery: [
+      { asset: { url: '/assets/images/2k25ragermain.png' } },
       { asset: { url: '/assets/images/2k25rager1.png' } },
       { asset: { url: '/assets/images/2k25rager2.png' } },
       { asset: { url: '/assets/images/2k25rager3.png' } },
@@ -395,12 +401,13 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     ],
     videoHighlights: [
       {
-        title: 'Rager Aftermovie',
-        url: 'https://vimeo.com/76979871',
+        title: 'RAGER Final',
+        url: '/assets/videos/RAGER_FINAL.mov',
+        type: 'video',
       },
     ],
     attendees: [],
-    attendeesCount: 25,
+    attendeesCount: 60,
   },
 }
 

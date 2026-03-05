@@ -84,7 +84,7 @@ export default function VideoHighlightCard({ highlight }: { highlight: Highlight
 
         {isModalOpen && (
           <div
-            className="fixed inset-0 z-50 flex cursor-grab items-center justify-center bg-neutral-900/90 backdrop-blur"
+            className="fixed inset-0 z-[80] flex cursor-grab items-center justify-center bg-neutral-900/95 backdrop-blur-lg"
             role="dialog"
             aria-modal="true"
           >

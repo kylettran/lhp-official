@@ -76,9 +76,19 @@ export default async function EventPage({
   const allEvents = await sanityClient.fetch(allEventsQuery)
 
   const fallbackEvent = pastEventFallbacks[slug]
-  const eventData =
+  let eventData =
     event ??
     fallbackEvent
+
+  if (
+    slug === '2k25-rager' &&
+    typeof eventData?.description === 'string'
+  ) {
+    eventData = {
+      ...eventData,
+      description: eventData.description.replace('Just Ken', 'KYLO'),
+    }
+  }
 
   if (!eventData) {
     return <div>Event not found</div>
@@ -141,12 +151,20 @@ export default async function EventPage({
   const recapLink = eventData.instagramRecapUrl ?? eventData.instagramUrl
   const viewLink = eventData.instagramViewUrl ?? eventData.instagramUrl
   const venueLink = eventData.venueLink
-  const attendeeCount =
+  const baseAttendeeCount =
     typeof eventData.attendeesCount === 'number'
       ? eventData.attendeesCount
       : hasAttendees
       ? eventData.attendees.length
       : '—'
+  const attendeeCount = slug === '2k25-rager' ? 60 : baseAttendeeCount
+  const lineupByRole = eventData.lineupByRole
+  const showLineupSections =
+    slug === '2k25-rager' &&
+    lineupByRole &&
+    Object.keys(lineupByRole).some(
+      (key) => Array.isArray(lineupByRole[key]) && lineupByRole[key].length > 0
+    )
 
   return (
     <main
@@ -191,9 +209,42 @@ export default async function EventPage({
                   {eventDate.toLocaleDateString()} · {eventData.location}
                 </p>
               </div>
-              <p className="max-w-xl text-base text-white/70">
-                {eventData.description}
-              </p>
+              {showLineupSections ? (
+                <div className="mt-6 grid gap-6 md:grid-cols-3">
+                  {(['hosts', 'artists', 'djs'] as Array<
+                    keyof typeof lineupByRole
+                  >).map((role) => {
+                    const label =
+                      role === 'hosts'
+                        ? 'Hosts'
+                        : role === 'artists'
+                        ? 'Artists'
+                        : 'DJs'
+                    const names = Array.isArray(lineupByRole[role])
+                      ? lineupByRole[role]
+                      : []
+                    if (!names.length) {
+                      return null
+                    }
+                    return (
+                      <div key={role} className="space-y-1">
+                        <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+                          {label}
+                        </p>
+                        <ul className="text-base font-semibold text-white">
+                          {names.map((name) => (
+                            <li key={name}>{name}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p className="max-w-xl text-base text-white/70">
+                  {eventData.description}
+                </p>
+              )}
               <div className="flex flex-wrap gap-3">
                 {recapLink && (
                   <a
