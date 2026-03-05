@@ -227,7 +227,7 @@ export default async function EventPage({
                       return null
                     }
                     return (
-                      <div key={role} className="space-y-1">
+                      <div key={String(role)} className="space-y-1">
                         <p className="text-xs uppercase tracking-[0.3em] text-white/60">
                           {label}
                         </p>
