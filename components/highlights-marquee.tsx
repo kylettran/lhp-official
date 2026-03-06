@@ -9,6 +9,7 @@ export type HighlightItem = {
 }
 
 const SPEED = 0.12
+const SLOWDOWN_MS = 12000
 
 export default function HighlightsMarquee({
   items,
@@ -23,11 +24,21 @@ export default function HighlightsMarquee({
     const track = trackRef.current
     if (!track) return
 
-    const updateWidth = () => track.scrollWidth / 2
-    let totalWidth = updateWidth()
+    let totalWidth = 0
+    let loopSpeed = SPEED
+    const updateWidth = () => {
+      totalWidth = track.scrollWidth / 2
+      loopSpeed =
+        totalWidth > 0
+          ? totalWidth / (totalWidth / SPEED + SLOWDOWN_MS)
+          : SPEED
+      return totalWidth
+    }
     let offset = 0
     let prevTimestamp = 0
     let requestId: number
+
+    updateWidth()
 
     const handleResize = () => {
       totalWidth = updateWidth()
@@ -37,7 +48,7 @@ export default function HighlightsMarquee({
     const step = (timestamp: number) => {
       if (prevTimestamp && !pauseRef.current) {
         const delta = timestamp - prevTimestamp
-        offset += SPEED * delta
+        offset += loopSpeed * delta
         if (totalWidth > 0 && offset >= totalWidth) {
           offset -= totalWidth
         }
