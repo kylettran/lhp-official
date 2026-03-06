@@ -1,6 +1,8 @@
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
+import LogoCarousel from '@/components/logo-carousel'
+import HighlightsMarquee, { HighlightItem } from '@/components/highlights-marquee'
 
 const upcomingEventQuery = groq`
   *[_type == "event" && status == "upcoming" && slug.current != "lion-heart-kickoff-night"]
@@ -15,14 +17,54 @@ const upcomingEventQuery = groq`
 
 export default async function HomePage() {
   const upcomingEvent = await sanityClient.fetch(upcomingEventQuery)
-  const highlightItems = [
-    { type: 'video', label: 'MP4 Highlight' },
-    { type: 'image', label: 'Photo Highlight' },
-    { type: 'video', label: 'Stage Cut' },
-    { type: 'image', label: 'Crowd Shot' },
-    { type: 'video', label: 'DJ Moment' },
-    { type: 'image', label: 'Backstage' },
+  const highlightItems: HighlightItem[] = [
+    {
+      type: 'video',
+      label: 'Main Promo',
+      src: '/assets/videos/main-promo.mov',
+    },
+    {
+      type: 'image',
+      label: 'Angel VIP',
+      src: '/assets/images/angel-vip-2.png',
+    },
+    {
+      type: 'image',
+      label: 'LAL9 Gallery',
+      src: '/assets/images/lal9.png',
+    },
+    {
+      type: 'video',
+      label: 'RAGER Final',
+      src: '/assets/videos/RAGER_FINAL.mov',
+    },
+    {
+      type: 'video',
+      label: 'Main Promo Video',
+      src: '/assets/videos/main promo video.mov',
+    },
+    {
+      type: 'image',
+      label: 'Stage Cut',
+      src: '/assets/images/lal4.png',
+    },
+    {
+      type: 'image',
+      label: 'Crowd Shot',
+      src: '/assets/images/lal5.png',
+    },
+    {
+      type: 'image',
+      label: 'DJ Moment',
+      src: '/assets/images/lal7.png',
+    },
+    {
+      type: 'image',
+      label: 'Backstage',
+      src: '/assets/images/lal2.png',
+    },
   ]
+  const marqueeItems = [...highlightItems, ...highlightItems]
 
   return (
     <main
@@ -46,6 +88,8 @@ export default async function HomePage() {
         />
         </section>
 
+        <LogoCarousel />
+
         <section className="relative space-y-6 rounded-3xl border border-white/20 bg-black/70 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="space-y-2">
@@ -63,23 +107,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-black/80 py-8">
-            <div className="carousel-track-slow flex gap-5 px-6">
-            {[...highlightItems, ...highlightItems].map((item, index) => (
-              <div
-                key={`${item.label}-${index}`}
-                className={`h-40 w-64 shrink-0 rounded-2xl border ${
-                  item.type === 'video'
-                    ? 'border-neutral-900 bg-neutral-900 text-white'
-                    : 'border-rose-200 bg-rose-50 text-rose-500'
-                } flex flex-col items-center justify-center text-center`}
-              >
-                <p className="text-xs uppercase tracking-[0.3em] opacity-70">
-                  {item.type === 'video' ? 'MP4' : 'Image'}
-                </p>
-                <p className="mt-2 text-sm font-semibold">{item.label}</p>
-              </div>
-            ))}
-            </div>
+            <HighlightsMarquee items={highlightItems} />
           </div>
         </section>
 
