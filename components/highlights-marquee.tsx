@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-type HighlightItem = {
+export type HighlightItem = {
   type: 'video' | 'image'
   label: string
   src?: string
