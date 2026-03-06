@@ -111,37 +111,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/20 bg-black/80 p-8 text-white">
-        {upcomingEvent ? (
-          <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-              Upcoming Event
-            </p>
-            <h2 className="text-4xl font-bold text-white">
-              {upcomingEvent.title}
-            </h2>
-            <p className="text-base text-white/70">
-              {new Date(upcomingEvent.date).toLocaleDateString()} ·{' '}
-              {upcomingEvent.location}
-            </p>
-            <Link
-              href={`/events/${upcomingEvent.slug.current}`}
-              className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white"
-            >
-              Buy Tickets
-            </Link>
-          </div>
-        ) : (
-          <div className="flex min-h-[280px] items-center justify-center rounded-2xl border border-dashed border-neutral-300 bg-neutral-50">
-            <img
-              src="/assets/images/lhp-logo.jpeg"
-              alt="Lion Heart Productions"
-              className="h-24 w-24 rounded-full object-cover"
-            />
-          </div>
-        )}
-      </section>
-      </div>
+        </div>
     </main>
   )
 }
