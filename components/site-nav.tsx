@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
-  { href: '/events', label: 'Past Events' },
+  { href: '/events', label: 'Events' },
   { href: '/artists', label: 'Team' },
   { href: '/wof#artists-section', label: 'WOF' },
   { href: '/about', label: 'About' },

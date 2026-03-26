@@ -107,14 +107,13 @@ export default async function PastEventsPage() {
 
       <div className="text-center">
         <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
-          Past Events
+          Lion Heart Productions
         </p>
         <h1 className="mt-2 text-4xl font-semibold text-neutral-900">
-          Recaps & Memories
+          All Events
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-sm text-neutral-500">
-          Every night has a story. Tap the date and event name to dive into the
-          full recap.
+          Upcoming nights, past recaps, and everything in between. Every event has a story.
         </p>
       </div>
 
