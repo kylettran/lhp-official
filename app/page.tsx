@@ -125,8 +125,20 @@ export default async function HomePage() {
         </section>
 
         {upcomingEvent && (
-          <section className="relative overflow-hidden rounded-3xl border border-white/20 bg-black/80 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+          <Link
+            href={`/events/${upcomingEvent.slug?.current ?? upcomingEvent.slug}`}
+            className="group relative block overflow-hidden rounded-3xl border border-white/20 bg-black/80 shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition hover:border-white/35"
+          >
             <div className="absolute inset-0 bg-gradient-to-br from-rose-950/40 via-transparent to-transparent pointer-events-none" />
+            {upcomingEvent.posterImage?.asset?.url && (
+              <div className="sm:hidden h-52 overflow-hidden">
+                <img
+                  src={upcomingEvent.posterImage.asset.url}
+                  alt={upcomingEvent.title}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
+            )}
             <div className="relative z-10 grid sm:grid-cols-[1fr_auto] gap-0">
               <div className="flex flex-col justify-center gap-4 p-8">
                 <span className="inline-flex w-fit items-center rounded-full border border-rose-400/50 bg-rose-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
@@ -144,12 +156,9 @@ export default async function HomePage() {
                 {upcomingEvent.description && (
                   <p className="max-w-md text-sm text-white/70">{upcomingEvent.description}</p>
                 )}
-                <Link
-                  href={`/events/${upcomingEvent.slug?.current ?? upcomingEvent.slug}`}
-                  className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-rose-400"
-                >
-                  View Event
-                </Link>
+                <span className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition group-hover:bg-rose-400">
+                  View Event →
+                </span>
               </div>
               {upcomingEvent.posterImage?.asset?.url && (
                 <div className="hidden sm:block w-64 shrink-0 overflow-hidden">
@@ -161,7 +170,7 @@ export default async function HomePage() {
                 </div>
               )}
             </div>
-          </section>
+          </Link>
         )}
 
         </div>
