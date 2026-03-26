@@ -160,6 +160,7 @@ export default async function EventPage({
       ? eventData.attendees.length
       : '—'
   const attendeeCount = slug === '2k25-rager' ? 60 : baseAttendeeCount
+  const isUpcoming = eventData.status === 'upcoming'
   const lineupByRole = eventData.lineupByRole
   const showLineupSections =
     lineupByRole &&
@@ -198,6 +199,11 @@ export default async function EventPage({
               {eventData.status === 'past' && (
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/80">
                   Past Event
+                </span>
+              )}
+              {eventData.status === 'upcoming' && (
+                <span className="inline-flex items-center gap-2 rounded-full border border-rose-400/50 bg-rose-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-rose-300">
+                  Upcoming Event
                 </span>
               )}
               <div>
@@ -263,7 +269,7 @@ export default async function EventPage({
                     rel="noreferrer"
                     target="_blank"
                   >
-                    Instagram Recap
+                    {isUpcoming ? 'Follow on Instagram' : 'Instagram Recap'}
                   </a>
                 )}
                 {eventData.ticketUrl && (
@@ -340,10 +346,10 @@ export default async function EventPage({
                   Add the event poster image in Sanity to spotlight the vibe.
                 </div>
               )}
-            {viewLink && (
+            {viewLink && !isUpcoming && (
               <a
                 href={viewLink}
-                className="absolute -bottom-6 left-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-lg sm:absolute sm:mt-0 sm:-bottom-6 sm:left-8"
                 rel="noreferrer"
                 target="_blank"
               >
@@ -364,22 +370,29 @@ export default async function EventPage({
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-transparent"
         />
-        <div className="relative z-10 flex items-end justify-between">
+        <div className="relative z-10 flex flex-wrap items-end justify-between gap-2">
           <h2 className={`${playfair.className} text-3xl font-semibold text-white`}>
             Photo Gallery
           </h2>
-          <p className="text-sm text-white/70">Highlights from the night</p>
+          <p className="text-sm text-white/70">
+            {isUpcoming ? 'Photos after the event' : 'Highlights from the night'}
+          </p>
         </div>
         <div className="mt-8">
-          {hasGallery ? (
+          {isUpcoming ? (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-white/20 bg-white/5 py-16 px-4 text-center">
+              <p className="text-2xl font-semibold text-white/80">Coming Soon</p>
+              <p className="text-sm text-white/50">Photos will drop after the event. Stay tuned.</p>
+            </div>
+          ) : hasGallery ? (
             <EventGallery images={eventData.gallery} />
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 3 }).map((_, index) => (
-                  <div
-                    key={`placeholder-${index}`}
-                    className="flex h-64 items-center justify-center rounded-2xl border border-white/30 bg-neutral-900/50 text-sm text-white/50"
-                  >
+                <div
+                  key={`placeholder-${index}`}
+                  className="flex h-64 items-center justify-center rounded-2xl border border-white/30 bg-neutral-900/50 text-sm text-white/50"
+                >
                   Upload photo highlight
                 </div>
               ))}
@@ -405,7 +418,12 @@ export default async function EventPage({
                 </p>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                {hasVideos ? (
+                {isUpcoming ? (
+                  <div className="col-span-full flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/20 bg-white/5 py-12 px-4 text-center">
+                    <p className="text-xl font-semibold text-white/80">Coming Soon</p>
+                    <p className="text-sm text-white/50">Video recaps will be added after the event.</p>
+                  </div>
+                ) : hasVideos ? (
                   eventData.videoHighlights.map((video: any, index: number) => (
                     <VideoHighlightCard
                       key={`${video?.url ?? 'video'}-${index}`}
@@ -438,34 +456,45 @@ export default async function EventPage({
             <h2
               className={`${playfair.className} text-3xl font-semibold text-white`}
             >
-              Message From Our Team
+              {isUpcoming ? 'From the Team' : 'Message From Our Team'}
             </h2>
             <p className="mt-4 text-white/70">
-              {eventData.teamMessage ||
-                'Drop a thank-you note or recap here. Highlight the artists, the energy, and what the night meant for the community.'}
+              {isUpcoming
+                ? "The team is putting everything together for an incredible night. Wetball909 × Atom Black with Lion Heart Productions — this one is going to be different. Follow us on Instagram to stay in the loop as more details drop."
+                : eventData.teamMessage ||
+                  'Drop a thank-you note or recap here. Highlight the artists, the energy, and what the night meant for the community.'}
             </p>
           </div>
           <div className="rounded-3xl border border-black/40 bg-neutral-900/70 p-8">
             <h3 className="text-sm uppercase tracking-[0.2em] text-white/70">
               Attendees
             </h3>
-            <p className="mt-2 text-3xl font-semibold text-white">
-              {attendeeCount}
-            </p>
-            <p className="mt-2 text-sm text-white/70">
-              Community members who showed love.
-            </p>
-            {hasAttendees && (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {eventData.attendees.map((name: string, index: number) => (
-                  <span
-                    key={`${name}-${index}`}
-                    className="rounded-full border border-white/30 px-3 py-1 text-xs uppercase tracking-wide text-white/70"
-                    >
-                    {name}
-                  </span>
-                ))}
-              </div>
+            {isUpcoming ? (
+              <>
+                <p className="mt-3 text-xl font-semibold text-white/40">Coming Soon</p>
+                <p className="mt-2 text-sm text-white/50">Be there. 🦁</p>
+              </>
+            ) : (
+              <>
+                <p className="mt-2 text-3xl font-semibold text-white">
+                  {attendeeCount}
+                </p>
+                <p className="mt-2 text-sm text-white/70">
+                  Community members who showed love.
+                </p>
+                {hasAttendees && (
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {eventData.attendees.map((name: string, index: number) => (
+                      <span
+                        key={`${name}-${index}`}
+                        className="rounded-full border border-white/30 px-3 py-1 text-xs uppercase tracking-wide text-white/70"
+                      >
+                        {name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

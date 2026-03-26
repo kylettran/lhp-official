@@ -15,8 +15,8 @@ export default function SiteNav() {
 
   return (
     <header className="border-b bg-white">
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
+      <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
           <img
             src="/assets/images/lhp-logo.jpeg"
             alt="Lion Heart Productions"
@@ -25,7 +25,7 @@ export default function SiteNav() {
           <span className="sr-only">Home</span>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           {navItems.map((item) => {
             const baseHref = item.href.split('#')[0]
             const isActive =
@@ -41,7 +41,7 @@ export default function SiteNav() {
                 >
                   <Link
                     href={item.href}
-                    className={`text-sm font-semibold uppercase tracking-wide transition ${
+                    className={`text-xs sm:text-sm font-semibold uppercase tracking-wide transition ${
                       isActive
                         ? 'text-violet-700 underline decoration-violet-500 underline-offset-8'
                         : 'text-neutral-600 hover:text-neutral-900'
@@ -77,7 +77,7 @@ export default function SiteNav() {
               <Link
                 key={`${item.href}-${item.label}`}
                 href={item.href}
-                className={`text-sm font-semibold uppercase tracking-wide transition ${
+                className={`text-xs sm:text-sm font-semibold uppercase tracking-wide transition ${
                   isActive
                     ? 'text-violet-700 underline decoration-violet-500 underline-offset-8'
                     : 'text-neutral-600 hover:text-neutral-900'

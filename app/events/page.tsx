@@ -25,7 +25,11 @@ export default async function PastEventsPage() {
   const fallbackEventsToAdd = pastEventFallbackList.filter(
     (fallback) =>
       !excludedSlugs.has(fallback.slug) &&
+      fallback.status !== 'upcoming' &&
       !pastEvents.some((event: any) => event.slug?.current === fallback.slug)
+  )
+  const upcomingFallbacks = pastEventFallbackList.filter(
+    (fallback) => fallback.status === 'upcoming' && !excludedSlugs.has(fallback.slug)
   )
   const combinedPastEvents = [
     ...pastEvents,
@@ -56,6 +60,51 @@ export default async function PastEventsPage() {
   }))
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
+      {upcomingFallbacks.length > 0 && (
+        <section className="mb-16">
+          <p className="mb-6 text-xs uppercase tracking-[0.3em] text-neutral-500">Upcoming</p>
+          <div className="flex flex-col gap-6">
+            {upcomingFallbacks.map((event) => (
+              <Link
+                key={event.slug}
+                href={`/events/${event.slug}`}
+                className="group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="grid sm:grid-cols-[auto_1fr] gap-0">
+                  {event.posterImage?.asset?.url && (
+                    <div className="h-52 sm:h-auto sm:w-52 shrink-0 overflow-hidden">
+                      <img
+                        src={event.posterImage.asset.url}
+                        alt={event.title}
+                        className="h-full w-full object-cover transition group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col justify-center gap-3 p-6">
+                    <span className="inline-flex w-fit items-center rounded-full border border-rose-300 bg-rose-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-rose-500">
+                      Coming Up
+                    </span>
+                    <h2 className="text-2xl font-bold text-neutral-900">{event.title}</h2>
+                    <p className="text-sm text-neutral-500">
+                      {new Date(event.date).toLocaleDateString(undefined, {
+                        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+                      })}
+                    </p>
+                    <p className="text-sm text-neutral-500">{event.location}</p>
+                    {event.description && (
+                      <p className="text-sm text-neutral-600 line-clamp-2">{event.description}</p>
+                    )}
+                    <span className="mt-1 inline-flex w-fit items-center gap-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 underline-offset-4 group-hover:underline">
+                      View Event →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="text-center">
         <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
           Past Events

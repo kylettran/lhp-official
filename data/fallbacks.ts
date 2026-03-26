@@ -254,7 +254,7 @@ For Kat, Lion Heart has never just been about throwing events — it's about bui
       instagram: 'https://www.instagram.com/ikitskat/',
     },
     showOnWof: false,
-    showOnTeam: true,
+    showOnTeam: false,
   },
   {
     _id: 'manual-kt',
@@ -306,7 +306,7 @@ export interface PastEventFallback {
   slug: string
   title: string
   date: string
-  status: 'past'
+  status: 'past' | 'upcoming'
   location: string
   description: string
   instagramUrl?: string
@@ -324,6 +324,28 @@ export interface PastEventFallback {
 }
 
 export const pastEventFallbacks: Record<string, PastEventFallback> = {
+  'baddie-con': {
+    slug: 'baddie-con',
+    title: 'Baddie Con',
+    date: '2026-04-30T21:00:00.000Z',
+    status: 'upcoming',
+    location: 'The Continental Room · Fullerton, CA',
+    description:
+      'A collab night brought to you by Wetball909 × Atom Black with Lion Heart Productions. Come through for a night of raw energy, heavy sets, and good people.',
+    instagramUrl: 'https://www.instagram.com/lion.heart.productions/',
+    venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
+    posterImage: { asset: { url: '/assets/images/baddie-con.png' } },
+    lineupByRole: {
+      hosts: [{ name: 'Kat', slug: 'kat' }],
+      artists: [
+        { name: 'Wetball909', slug: 'wetball909' },
+        { name: 'Atom Black', slug: 'atom-black' },
+      ],
+    },
+    gallery: [],
+    videoHighlights: [],
+    attendees: [],
+  },
   'lovers-and-loners': {
     slug: 'lovers-and-loners',
     title: 'Lovers & Loners',
