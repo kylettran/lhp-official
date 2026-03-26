@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
@@ -6,6 +6,15 @@ import {
   manualArtistProfilesBySlug,
   normalizeName,
 } from '@/data/fallbacks'
+
+function renderBoldText(text: string): ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*)/)
+  return parts.map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i} className="font-semibold text-white">{part.slice(2, -2)}</strong>
+      : part
+  )
+}
 
 const slugAliasMap: Record<string, string> = {
   kat: 'katherine-de-leon',
@@ -54,8 +63,9 @@ export default async function ArtistPage({
   params,
   searchParams,
 }: { params: any; searchParams?: any }) {
-  const { slug } = params
-  const showBackToWof = searchParams?.from === 'wof'
+  const { slug } = await params
+  const resolvedSearchParams = await searchParams
+  const showBackToWof = resolvedSearchParams?.from === 'wof'
   const resolvedSlug = slugAliasMap[slug] ?? slug
 
   const sanityArtist = await sanityClient.fetch(artistBySlugQuery, { slug: resolvedSlug })
@@ -201,17 +211,35 @@ export default async function ArtistPage({
       )}
 
       <section className="mb-8">
-        <div className="space-y-6 text-center">
+        <div className="space-y-6">
           <h2 className="text-xl font-semibold text-neutral-900">About</h2>
-          <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-gradient-to-br from-[#111025] to-[#1b1630] p-8 text-center text-neutral-200 shadow-lg shadow-[#150c2d]/30">
-            {biographySegments.map((segment, index) => (
-              <p
-                key={`bio-segment-${index}`}
-                className="text-base leading-relaxed text-neutral-200"
-              >
-                {segment}
-              </p>
-            ))}
+          <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-gradient-to-br from-[#111025] to-[#1b1630] shadow-lg shadow-[#150c2d]/30 overflow-hidden">
+            <div className="h-1 w-full bg-gradient-to-r from-purple-500/60 via-violet-400/40 to-transparent" />
+            <div className="p-8 space-y-8">
+              <div className="space-y-5">
+                {biographySegments.slice(0, 2).map((segment, index) => (
+                  <p key={`bio-top-${index}`} className="text-base leading-relaxed text-neutral-300">
+                    {renderBoldText(segment)}
+                  </p>
+                ))}
+              </div>
+
+              {isKat && (
+                <blockquote className="relative border-l-2 border-purple-400/70 pl-5 py-1">
+                  <p className="text-lg italic leading-relaxed text-neutral-200">
+                    "If a door doesn't open, she'll probably throw an event right outside of it."
+                  </p>
+                </blockquote>
+              )}
+
+              <div className="space-y-5">
+                {biographySegments.slice(2).map((segment, index) => (
+                  <p key={`bio-bottom-${index}`} className="text-base leading-relaxed text-neutral-300">
+                    {renderBoldText(segment)}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

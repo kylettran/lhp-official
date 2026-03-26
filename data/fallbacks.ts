@@ -238,6 +238,25 @@ He joined Lovers & Loners as a surprise collaborator, making the night feel like
     imageFocus: '50% 85%',
   },
   {
+    _id: 'manual-katherine-de-leon',
+    name: 'Kat',
+    slug: { current: 'katherine-de-leon' },
+    role: 'Co-Founder',
+    bio: `Before founding Lion Heart Productions, Kat spent years in hospitality as a bartender and server — a world that teaches you fast how to **read a room, connect with people, and keep energy right**. If you've ever met her, you know she can talk to just about anyone and turn strangers into friends before the night's even over. Being around music and nightlife only fueled something that had always been in her: the feeling she was meant to build something bigger. Kat has always believed strongly in **manifestation** — speaking things into existence, moving with intention, and trusting that faith and hard work will meet opportunity somewhere along the way.
+
+In the early days, it was really just Kat and Aye.Are figuring it out as they went — no big team, no industry connections, just **two people with a vision and a lot of determination**. As Aye.Are was preparing for his first show in Los Angeles, they hit the same wall many independent artists face: unanswered messages, closed doors, and a whole lot of "no's." Their response? Stop waiting for someone to give them an opportunity and **just create their own**.
+
+What started as building stages for Aye.Are quickly became something much bigger. Together they built **Lion Heart Productions** — not just to push their own vision forward, but to create the kind of versatile, welcoming creative space they wished had existed when they were starting out. A place where artists, DJs, and creatives could actually be **seen, heard, and supported**.
+
+For Kat, Lion Heart has never just been about throwing events — it's about building **real community and real opportunity**. Built on faith, manifestation, and a relentless go-getter attitude, what started as two people refusing to take "no" for an answer has grown into a platform dedicated to **opening doors for others**. And if you ask Kat, this is still just the warm-up — expanding cities, creating stages everywhere, building spaces where creatives can thrive. **Lion Heart is only getting started. 🦁✨**`,
+    imageUrl: '/assets/images/kat-pfp.png',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/ikitskat/',
+    },
+    showOnWof: false,
+    showOnTeam: true,
+  },
+  {
     _id: 'manual-kt',
     name: 'KT',
     slug: { current: 'kt' },
