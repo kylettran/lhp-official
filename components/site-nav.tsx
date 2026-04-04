@@ -8,6 +8,7 @@ const navItems = [
   { href: '/artists', label: 'Team' },
   { href: '/wof#artists-section', label: 'WOF' },
   { href: '/about', label: 'About' },
+  { href: '/submit', label: 'Submit' },
 ]
 
 export default function SiteNav() {

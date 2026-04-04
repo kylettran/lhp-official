@@ -3,7 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
-    // Enable experimental features if needed
+    serverActions: {
+      bodySizeLimit: '26mb',
+    },
   },
   async redirects() {
     return [
