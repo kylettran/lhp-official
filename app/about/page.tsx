@@ -1,3 +1,5 @@
+import FeedbackForm from './FeedbackForm'
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#0f0b1f] text-white">
@@ -72,6 +74,19 @@ export default function AboutPage() {
           </p>
           <div className="text-lg font-semibold text-[#78bfff]">Welcome to Lion Heart.</div>
         </section>
+
+        {/* Feedback */}
+        <section className="rounded-3xl border border-white/5 bg-white/3 p-8 backdrop-blur">
+          <div className="mb-6 space-y-2">
+            <p className="text-xs uppercase tracking-[0.9em] text-[#8fb0ff]">Your Voice</p>
+            <h2 className="text-2xl font-semibold text-white">Help us get better</h2>
+            <p className="text-sm text-white/60">
+              Quick thoughts? We read every message and use it to improve the experience.
+            </p>
+          </div>
+          <FeedbackForm />
+        </section>
+
       </div>
     </main>
   )
