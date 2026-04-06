@@ -1,6 +1,7 @@
 'use client'
 
 import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 type PosterViewerProps = {
   imageUrl: string
@@ -73,11 +74,16 @@ export default function PosterViewer({ imageUrl, title }: PosterViewerProps) {
           onClick={open}
           className="group relative cursor-pointer overflow-hidden rounded-3xl border border-rose-200 bg-white shadow-[0_20px_60px_-30px_rgba(120,45,45,0.35)] transition hover:border-rose-300 hover:scale-105 w-full"
         >
-          <img
-            src={imageUrl}
-            alt={`${title} poster`}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          />
+          <div className="relative aspect-[3/4] w-full overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt={`${title} poster`}
+              fill
+              className="object-cover transition duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 80vw, 448px"
+              priority
+            />
+          </div>
         </button>
       </div>
 
@@ -102,11 +108,13 @@ export default function PosterViewer({ imageUrl, title }: PosterViewerProps) {
           >
             ✕
           </button>
-          <img
+          <Image
             src={imageUrl}
             alt={`${title} poster expanded`}
+            width={800}
+            height={1100}
             draggable={false}
-            className="max-h-[85dvh] max-w-[92vw] object-contain"
+            className="max-h-[85dvh] max-w-[92vw] object-contain w-auto h-auto"
             style={{
               transform: `translate(${position.x}px, ${position.y}px)`,
               cursor: isDragging ? 'grabbing' : 'grab',
@@ -114,6 +122,7 @@ export default function PosterViewer({ imageUrl, title }: PosterViewerProps) {
             }}
             onMouseDown={(e) => { e.preventDefault(); beginDrag(e.clientX, e.clientY) }}
             onTouchStart={(e) => beginDrag(e.touches[0].clientX, e.touches[0].clientY)}
+            sizes="92vw"
           />
         </div>
       )}

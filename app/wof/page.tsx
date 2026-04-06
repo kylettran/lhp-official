@@ -2,6 +2,7 @@ import { manualArtistProfiles, normalizeName } from '@/data/fallbacks'
 import { sanityClient } from '@/lib/sanity.client'
 import { allArtistsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { CSSProperties } from 'react'
 
 type Artist = {
@@ -74,12 +75,16 @@ export default async function WofPage() {
     }
 
     const portrait = artist.imageSrc ? (
-      <img
-        src={artist.imageSrc}
-        alt={artist.name ?? 'Artist portrait'}
-        className="mb-4 h-48 w-full rounded-lg object-cover object-center"
-        style={imageStyle}
-      />
+      <div className="relative mb-4 h-48 w-full rounded-lg overflow-hidden">
+        <Image
+          src={artist.imageSrc}
+          alt={artist.name ?? 'Artist portrait'}
+          fill
+          className="object-cover object-center"
+          style={imageStyle}
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+        />
+      </div>
     ) : (
       <div className="mb-4 flex h-48 w-full flex-col items-center justify-center rounded-lg border border-dashed border-neutral-300 bg-white/70 text-center text-xs uppercase tracking-[0.3em] text-neutral-500">
         <span>Portrait pending</span>

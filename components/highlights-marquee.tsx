@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 export type HighlightItem = {
   type: 'video' | 'image'
@@ -111,7 +112,7 @@ export default function HighlightsMarquee({
               />
             )}
             {item.src && item.type === 'image' && (
-              <img src={item.src} alt={item.label} className="h-full w-full object-cover" />
+              <Image src={item.src} alt={item.label} fill className="object-cover" sizes="256px" />
             )}
             {!item.src && (
               <div
@@ -151,11 +152,15 @@ export default function HighlightsMarquee({
                 playsInline
               />
             ) : marqueeItems[openIndex].src ? (
-              <img
-                src={marqueeItems[openIndex].src}
-                alt={marqueeItems[openIndex].label}
-                className="h-[70vh] w-full object-cover"
-              />
+              <div className="relative h-[70vh] w-full">
+                <Image
+                  src={marqueeItems[openIndex].src!}
+                  alt={marqueeItems[openIndex].label}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              </div>
             ) : (
               <div className="h-[70vh] w-full rounded-3xl bg-neutral-900" />
             )}

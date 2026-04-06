@@ -1,6 +1,7 @@
 'use client'
 
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 
 type GalleryImage = {
   asset?: {
@@ -120,16 +121,18 @@ export default function EventGallery({
             className="group relative cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl border border-white/20 bg-neutral-900/60 transition hover:border-white/40 hover:shadow-[0_10px_40px_rgba(0,0,0,0.35)]"
               onClick={() => open(index)}
             >
-              <div className="h-64 w-full overflow-hidden">
-                <img
+              <div className="relative h-64 w-full overflow-hidden">
+                <Image
                   src={url}
                   alt={`Gallery image ${index + 1}`}
-                  className="h-64 w-full cursor-grab active:cursor-grabbing object-cover transition duration-500 group-hover:scale-105"
+                  fill
+                  className="cursor-grab active:cursor-grabbing object-cover transition duration-500 group-hover:scale-105"
                   style={{
                     objectPosition,
                     transform: transformOverride,
                     minHeight: '110%',
                   }}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
               <span className="sr-only">Open gallery image</span>
@@ -153,10 +156,13 @@ export default function EventGallery({
           >
             X
           </button>
-          <img
+          <Image
             src={currentImage}
             alt="Expanded gallery"
-            className="mx-auto max-h-[90vh] max-w-[90vw] cursor-grab object-contain"
+            width={1200}
+            height={900}
+            className="mx-auto max-h-[90vh] max-w-[90vw] cursor-grab object-contain w-auto h-auto"
+            sizes="90vw"
           />
         </div>
       )}

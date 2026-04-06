@@ -2,6 +2,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   manualArtistProfilesBySlug,
   normalizeName,
@@ -45,10 +46,12 @@ const socialIconMap: Record<string, ReactElement> = {
     </svg>
   ),
   linkedin: (
-    <img
+    <Image
       src="/assets/images/linkedin.png"
       alt="LinkedIn"
-      className="h-6 w-6 object-contain"
+      width={24}
+      height={24}
+      className="object-contain"
     />
   ),
 }
@@ -179,7 +182,7 @@ export default async function ArtistPage({
       }
 
   return (
-      <main className="mx-auto max-w-3xl px-4 py-16">
+      <main className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
         <div className="mb-8 flex flex-wrap items-center gap-3">
         <Link
           href={returnLink.href}
@@ -191,15 +194,18 @@ export default async function ArtistPage({
 
       {profileImageSrc && (
         <div className="mb-6 flex justify-center">
-          <img
+          <Image
             src={profileImageSrc}
             alt={displayName}
+            width={768}
+            height={1024}
             className="w-full max-w-3xl rounded-2xl object-cover"
             style={{
-              width: '100%',
+              height: 'auto',
               maxHeight: 'min(80vh, 36rem)',
               objectPosition: imageObjectPosition,
             }}
+            sizes="(max-width: 768px) 100vw, 768px"
           />
         </div>
       )}

@@ -1,6 +1,7 @@
 import { sanityClient } from '@/lib/sanity.client'
 import { allArtistsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import { manualArtistProfiles, normalizeName } from '@/data/fallbacks'
 
@@ -44,8 +45,8 @@ export default async function ArtistsPage() {
   const apOverride = '/assets/images/ap-portrait.png'
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16">
-      <h1 className="mb-10 text-4xl font-bold">Members</h1>
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <h1 className="mb-8 sm:mb-10 text-3xl sm:text-4xl font-bold">Members</h1>
       <div id="artists-grid" className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
         {combinedMembers.map((artist: any) => {
           const normalizedName = normalizeName(artist.name)
@@ -95,20 +96,28 @@ export default async function ArtistsPage() {
               {imageSrc ? (
                 profilePath ? (
                   <Link href={profilePath} className="block">
-                    <img
-                      src={imageSrc}
-                      alt={displayName}
-                      className="h-48 w-full rounded-lg mb-4 object-cover"
-                      style={imageStyle}
-                    />
+                    <div className="relative h-48 w-full rounded-lg mb-4 overflow-hidden">
+                      <Image
+                        src={imageSrc}
+                        alt={displayName}
+                        fill
+                        className="object-cover"
+                        style={imageStyle}
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                      />
+                    </div>
                   </Link>
                 ) : (
-                    <img
+                  <div className="relative h-48 w-full rounded-lg mb-4 overflow-hidden">
+                    <Image
                       src={imageSrc}
                       alt={displayName}
-                      className="h-48 w-full rounded-lg mb-4 object-cover"
+                      fill
+                      className="object-cover"
                       style={imageStyle}
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                     />
+                  </div>
                 )
               ) : (
                 <div className="h-48 w-full rounded-lg bg-gray-100 mb-4 flex items-center justify-center text-gray-400">

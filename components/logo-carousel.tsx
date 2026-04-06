@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 const logos = [
   { label: 'TCR LOGO', src: '/assets/images/tcr%20logo.png' },
   { label: '' },
@@ -21,7 +23,7 @@ export default function LogoCarousel() {
           {[...logos, ...logos].map((logo, index) => (
             <div key={`${index}`} className="logo-slot">
               {logo.src ? (
-                <img src={logo.src} alt={logo.label} className="logo-image" />
+                <Image src={logo.src} alt={logo.label} width={204} height={82} className="logo-image" style={{ width: 'auto', height: 'auto' }} />
               ) : (
                 <span aria-hidden="true" />
               )}
