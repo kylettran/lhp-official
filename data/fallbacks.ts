@@ -300,7 +300,7 @@ export const manualArtistProfilesBySlug = manualProfiles.reduce<Record<string, M
   {}
 )
 
-export type LineupRole = 'hosts' | 'artists' | 'djs'
+export type LineupRole = 'hosts' | 'artists' | 'djs' | 'specialGuests'
 
 export interface PastEventFallback {
   slug: string
@@ -320,6 +320,7 @@ export interface PastEventFallback {
   videoHighlights?: { title: string; url: string; type?: 'video' | 'link' }[]
   attendees?: string[]
   attendeesCount?: number
+  rsvpUrl?: string
   lineupByRole?: Partial<Record<LineupRole, { name: string; slug: string }[]>>
 }
 
@@ -333,13 +334,24 @@ export const pastEventFallbacks: Record<string, PastEventFallback> = {
     description:
       'A collab night brought to you by Wetball909 × Atom Black with Lion Heart Productions. Come through for a night of raw energy, heavy sets, and good people.',
     instagramUrl: 'https://www.instagram.com/lion.heart.productions/',
+    rsvpUrl: 'https://partiful.com/e/uGCgVf7mCbhWNrth485s?',
     venueLink: 'https://www.instagram.com/thecontinentalroom/?hl=en',
     posterImage: { asset: { url: '/assets/images/baddie-con.png' } },
     lineupByRole: {
-      hosts: [{ name: 'Kat', slug: 'kat' }],
+      hosts: [
+        { name: 'Pak Joco', slug: 'pak-joco' },
+        { name: 'ndicaariel', slug: 'ndicaariel' },
+      ],
       artists: [
-        { name: 'Wetball909', slug: 'wetball909' },
-        { name: 'Atom Black', slug: 'atom-black' },
+        { name: 'Pak Joco', slug: 'pak-joco' },
+        { name: 'Wetball', slug: 'wetball' },
+      ],
+      djs: [
+        { name: 'ndicaariel', slug: 'ndicaariel' },
+        { name: 'venusbinz', slug: 'venusbinz' },
+      ],
+      specialGuests: [
+        { name: 'atom.black', slug: 'atom-black' },
       ],
     },
     gallery: [],

@@ -1,6 +1,7 @@
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   curatedImpactEventStats,
   pastEventFallbackList,
@@ -72,11 +73,13 @@ export default async function PastEventsPage() {
               >
                 <div className="grid sm:grid-cols-[auto_1fr] gap-0">
                   {event.posterImage?.asset?.url && (
-                    <div className="h-52 sm:h-auto sm:w-52 shrink-0 overflow-hidden">
-                      <img
+                    <div className="relative h-52 sm:h-auto sm:w-52 sm:min-h-[208px] shrink-0 overflow-hidden">
+                      <Image
                         src={event.posterImage.asset.url}
                         alt={event.title}
-                        className="h-full w-full object-cover transition group-hover:scale-105"
+                        fill
+                        className="object-cover transition group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, 208px"
                       />
                     </div>
                   )}
