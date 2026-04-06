@@ -383,4 +383,27 @@
   .impact-section {
     padding: 1.25rem;
   }
+
+  .impact-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .impact-total-number {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .home-video {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+  }
+
+  .home-video__player {
+    border-radius: 0;
+    width: 100%;
+  }
+}
+
+body {
+  overflow-x: hidden;
 }

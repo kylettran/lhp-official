@@ -193,7 +193,7 @@ export default async function EventPage({
         }}
       />
       <div className="relative z-10 overflow-hidden bg-black/80 backdrop-blur-sm">
-        <div className="relative max-w-6xl mx-auto px-6 py-16">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
               {eventData.status === 'past' && (
@@ -218,13 +218,15 @@ export default async function EventPage({
               </div>
               {showLineupSections ? (
                 <div className="mt-6 grid gap-6 md:grid-cols-3">
-                  {(['hosts', 'artists', 'djs'] as Array<LineupRole>).map(
+                  {(['hosts', 'artists', 'djs', 'specialGuests'] as Array<LineupRole>).map(
                     (role) => {
                       const label =
                         role === 'hosts'
                           ? 'Hosts'
                           : role === 'artists'
                           ? 'Artists'
+                          : role === 'specialGuests'
+                          ? 'Special Guest'
                           : 'DJs'
                       const entries = Array.isArray(lineupByRole?.[role])
                         ? lineupByRole?.[role]
@@ -262,7 +264,16 @@ export default async function EventPage({
                 </p>
               )}
               <div className="flex flex-wrap gap-3">
-                {recapLink && (
+                {isUpcoming && eventData.rsvpUrl ? (
+                  <a
+                    href={eventData.rsvpUrl}
+                    className="inline-flex items-center justify-center rounded-full bg-rose-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-rose-400"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    RSVP to the Event
+                  </a>
+                ) : recapLink ? (
                   <a
                     href={recapLink}
                     className="inline-flex items-center justify-center rounded-full bg-rose-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-rose-400"
@@ -271,7 +282,7 @@ export default async function EventPage({
                   >
                     {isUpcoming ? 'Follow on Instagram' : 'Instagram Recap'}
                   </a>
-                )}
+                ) : null}
                 {eventData.ticketUrl && (
                   <a
                     href={eventData.ticketUrl}
@@ -365,7 +376,7 @@ export default async function EventPage({
       />
     </div>
 
-      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-14">
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-transparent"
@@ -407,7 +418,7 @@ export default async function EventPage({
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/70 to-transparent"
         />
         <div className="relative z-10 flex justify-center px-4">
-          <div className="w-full max-w-6xl rounded-[36px] border border-white/5 bg-neutral-950/90 px-6 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.4)]">
+          <div className="w-full max-w-6xl rounded-[36px] border border-white/5 bg-neutral-950/90 px-4 sm:px-6 py-10 sm:py-16 shadow-[0_30px_80px_rgba(0,0,0,0.4)]">
             <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
               <div>
                 <h2 className={`${playfair.className} text-3xl font-semibold`}>
@@ -446,7 +457,7 @@ export default async function EventPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-16">
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-transparent"

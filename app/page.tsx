@@ -1,6 +1,7 @@
 import { sanityClient } from '@/lib/sanity.client'
 import groq from 'groq'
 import Link from 'next/link'
+import Image from 'next/image'
 import LogoCarousel from '@/components/logo-carousel'
 import HighlightsMarquee, { HighlightItem } from '@/components/highlights-marquee'
 import { pastEventFallbackList } from '@/data/fallbacks'
@@ -86,7 +87,7 @@ export default async function HomePage() {
         backgroundImage: "url('/assets/images/liquid chrome background.avif')",
       }}
     >
-      <div className="mx-auto max-w-5xl space-y-20">
+      <div className="mx-auto max-w-5xl space-y-10 sm:space-y-20">
         <section className="home-video">
         <video
           className="home-video__player"
@@ -103,7 +104,7 @@ export default async function HomePage() {
 
         <LogoCarousel />
 
-        <section className="relative space-y-6 rounded-3xl border border-white/20 bg-black/70 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+        <section className="relative space-y-6 rounded-3xl border border-white/20 bg-black/70 p-4 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.3em] text-white/60">
@@ -131,20 +132,23 @@ export default async function HomePage() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-rose-950/40 via-transparent to-transparent pointer-events-none" />
             {upcomingEvent.posterImage?.asset?.url && (
-              <div className="sm:hidden h-52 overflow-hidden">
-                <img
+              <div className="sm:hidden relative h-52 overflow-hidden">
+                <Image
                   src={upcomingEvent.posterImage.asset.url}
                   alt={upcomingEvent.title}
-                  className="h-full w-full object-cover object-top"
+                  fill
+                  className="object-cover object-top"
+                  sizes="100vw"
+                  priority
                 />
               </div>
             )}
             <div className="relative z-10 grid sm:grid-cols-[1fr_auto] gap-0">
-              <div className="flex flex-col justify-center gap-4 p-8">
+              <div className="flex flex-col justify-center gap-4 p-4 sm:p-8">
                 <span className="inline-flex w-fit items-center rounded-full border border-rose-400/50 bg-rose-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
                   Next Event
                 </span>
-                <h2 className="text-4xl font-bold text-white">{upcomingEvent.title}</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">{upcomingEvent.title}</h2>
                 <div className="space-y-1">
                   <p className="text-sm text-white/60">
                     {new Date(upcomingEvent.date).toLocaleDateString(undefined, {
@@ -161,11 +165,14 @@ export default async function HomePage() {
                 </span>
               </div>
               {upcomingEvent.posterImage?.asset?.url && (
-                <div className="hidden sm:block w-64 shrink-0 overflow-hidden">
-                  <img
+                <div className="hidden sm:block relative w-64 shrink-0 overflow-hidden">
+                  <Image
                     src={upcomingEvent.posterImage.asset.url}
                     alt={upcomingEvent.title}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="256px"
+                    priority
                   />
                 </div>
               )}
