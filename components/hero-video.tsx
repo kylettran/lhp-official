@@ -48,7 +48,7 @@ export default function HeroVideo({ src, className }: HeroVideoProps) {
       loop
       muted
       playsInline
-      preload="auto"
+      preload="none"
     />
   )
 }
