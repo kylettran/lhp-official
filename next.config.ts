@@ -1,11 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   experimental: {
     serverActions: {
       bodySizeLimit: '26mb',
     },
+  },
+  images: {
+    remotePatterns: [{ hostname: 'cdn.sanity.io' }],
+    deviceSizes: [390, 640, 828, 1080, 1200, 1920],
+    formats: ['image/avif', 'image/webp'],
   },
   async redirects() {
     return [
@@ -16,20 +20,6 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  // Ensure proper handling of Vercel Analytics and Speed Insights
-  // headers: async () => {
-  //   return [
-  //     {
-  //       source: '/_vercel/speed-insights/script.js',
-  //       headers: [
-  //         {
-  //           key: 'Cache-Control',
-  //           value: 'public, max-age=31536000, immutable',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;
