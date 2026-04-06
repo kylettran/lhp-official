@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 const navItems = [
   { href: '/events', label: 'Events' },
@@ -18,10 +19,13 @@ export default function SiteNav() {
     <header className="border-b bg-white">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <img
+          <Image
             src="/assets/images/lhp-logo.jpeg"
             alt="Lion Heart Productions"
-            className="h-9 w-9 rounded-full object-cover"
+            width={36}
+            height={36}
+            className="rounded-full object-cover"
+            priority
           />
           <span className="sr-only">Home</span>
         </Link>
